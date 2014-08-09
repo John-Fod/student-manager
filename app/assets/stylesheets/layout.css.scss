@@ -6,6 +6,7 @@
 
 /*************************
 -FLASH MESSAGES
+-LAYOUT HEADER
 
 
 
@@ -13,10 +14,37 @@
 *************************/
 
 
+/****LAYOUT HEADER
+*****************/
+#layout-header-holder{
+	background-color:					$support;
+	color:										$off-verylight;
+
+	#layout-header{
+		position:								relative;
+
+		#layout-title{
+			color:								$base-verylight;
+			font-size:						20px;
+			font-weight:					bold;
+			display:							inline-block;
+			vertical-align:				top;
+		}
+
+		#session-options{
+			position:							absolute;
+			top:									0px;
+			right:								0px;
+			display:							inline-block;
+		}
+	}
+}
 
 
 
 
+/****FLASH MESSAGES
+******************/
 .flash{
 	margin-bottom:						10px;
 	border:										2px solid $grey-light;

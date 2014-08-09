@@ -1,0 +1,47 @@
+<h1>Sign Up</h1>
+
+
+<%= form_for @teacher do |f| %>
+
+	<%- #-----ERROR MESSAGES %>
+	<% if @teacher.errors.any? %>
+		<div class="error-messages">
+			<h2>Invalid Teacher</h2>
+			<ul>
+				<% for message in @teacher.errors.full_messages %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="form-fields">
+		<ul>
+			<li class="input-field">
+				<%= f.label :email %>
+				<%= f.text_field :email %>
+			</li>
+
+			<li class="input-field">
+				<%= f.label :teachername %>
+				<%= f.text_field :teachername %>
+			</li>
+
+			<li class="input-field">
+				<%= f.label :password %>
+				<%= f.password_field :password %>
+			</li>
+
+			<li class="input-field">
+				<%= f.label :password_confirmation %>
+				<%= f.password_field :password_confirmation %>
+			</li>
+
+			<li class="submit-field">
+				<%= f.submit "Register", :id => "commit" %>
+			</li>
+		</ul>
+	</div>
+
+
+<% end %>

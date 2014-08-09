@@ -1,0 +1,20 @@
+
+
+/* #COLORS
+================================================== */
+$base:					rgba(240,225,197,1);
+	$base-light:		lighten($base,5%);
+	$base-verylight:	lighten($base,10%);
+	$base-dark:			darken($base,5%);
+	$base-verydark:		darken($base,10%);
+$off:					rgba(91,242,160,1);
+	$off-light:			lighten($off,10%);
+	$off-verylight:		lighten($off,15%);
+	$off-dark:			darken($off,10%);
+	$off-verydark:		darken($off,15%);
+$support:				rgba(169,136,189,1);
+	$support-light:		lighten($support,10%);
+	$support-verylight:	lighten($support,15%);
+	$support-dark:		darken($support,10%);
+	$support-verydark:	darken($support,20%);
+

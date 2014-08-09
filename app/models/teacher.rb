@@ -29,6 +29,7 @@ class Teacher < ActiveRecord::Base
 	#-AUTHENTICATE USER
 	def self.authenticate(email, password)
 		teacher = find_by_email(email)
+		teacher = find_by_teachername(email) unless teacher
 		if teacher && teacher.password_hash == BCrypt::Engine.hash_secret(password, teacher.password_salt)
 			teacher
 		else

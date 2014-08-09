@@ -6,6 +6,7 @@ Feature: Teacher creation
 Background:
 
 
+
 #----- SUCCESSFULLY REGISTERING A NEW TEACHER
 #--------------------------------------------
 
@@ -17,6 +18,7 @@ Background:
     And I fill in "teacher_teachername" with "John"
     And I press "commit"
     Then I should see a flash "notice" of "Sign up successful.  Welcome to Schologue!"
+
 
 
 #----- FORM VALIDATIONS
@@ -88,13 +90,15 @@ Background:
     And I press "commit"
     Then I should see an error message of "Password confirmation doesn't match Password"
 
+
+
 #----- USER VALIDATIONS
 #----------------------
 
-    Scenario: A logged in user attempts to register as a teacher
-        Given the following teachers:
-            | teachername  | email                |
-            | Akahige      | akahige@gmail.com    |
-        And I am logged in as "akahige@gmail.com"
-        When I am on the "new_teacher" page
-        Then I should see a flash "alert" of "You must first log out to do that."
+  Scenario: A logged in user attempts to register as a teacher
+    Given the following teachers:
+      | teachername  | email                |
+      | Akahige      | akahige@gmail.com    |
+    And I am logged in as "akahige@gmail.com"
+    When I am on the "new_teacher" page
+    Then I should see a flash "alert" of "You must first log out to do that."

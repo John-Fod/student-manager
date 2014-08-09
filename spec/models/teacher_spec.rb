@@ -7,6 +7,11 @@ describe Teacher do
   	Teacher.authenticate('akahige@gmail.com', '123').should == teacher
   end
 
+  it "should authenticate with matching username and password" do
+  	teacher = FactoryGirl.create(:teacher, :teachername => "Akahige", :password => "123")
+  	Teacher.authenticate('Akahige', '123').should == teacher
+  end
+
   it "should not authenticate with an incorrect password" do 
   	teacher = FactoryGirl.create(:teacher, :teachername => "akahige", :password => "123")
   	Teacher.authenticate('akahige@gmail.com', '456').should be_nil

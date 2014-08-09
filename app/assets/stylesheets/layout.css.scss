@@ -1,0 +1,35 @@
+@import 'colors';
+@import 'text';
+/**************************************
+*****THE BASIC PAGE LAYOUT*************
+**************************************/
+
+/*************************
+-FLASH MESSAGES
+
+
+
+
+*************************/
+
+
+
+
+
+
+.flash{
+	margin-bottom:						10px;
+	border:										2px solid $grey-light;
+	padding:									3px 10px;
+	text-align:								center;
+	font-family:							$sans;
+	font-weight:							bold;
+	font-size:								14px;
+	color:										$grey;
+
+	&.notice{
+		border-color:						$green-dark;
+		background-color:				$green-verylight;
+		color:									$green-dark;
+	}
+}

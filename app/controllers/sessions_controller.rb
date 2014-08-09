@@ -14,18 +14,21 @@ class SessionsController < ApplicationController
 
   	if teacher
   		session[:teacher_id] = teacher.id
-  		redirect_to dashboard_path, :notice => "You are now logged in."
+  		redirect_to dashboard_path, :notice => "Login successful."
   	else
-  		flash.now.alert = "Invalid email or password"
+  		flash.now.alert = "Invalid email or password."
   		render "new"
   	end
 
   end
 
-
   def destroy
-  	session[:teacher_id] = nil
-  	redirect_to home_path, :notice => "You are now logged out"
+    if current_teacher
+      session[:teacher_id] = nil
+      redirect_to home_path, :notice => "Logout successful."
+    else
+      redirect_to login_path, :alert => "You must be logged in to do that."
+    end
   end
 
 

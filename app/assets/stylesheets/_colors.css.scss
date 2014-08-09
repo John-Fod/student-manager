@@ -1,20 +1,39 @@
-
-
 /* #COLORS
 ================================================== */
+
+
 $base:					rgba(240,225,197,1);
 	$base-light:		lighten($base,5%);
 	$base-verylight:	lighten($base,10%);
 	$base-dark:			darken($base,5%);
 	$base-verydark:		darken($base,10%);
+
+
 $off:					rgba(91,242,160,1);
 	$off-light:			lighten($off,10%);
 	$off-verylight:		lighten($off,15%);
 	$off-dark:			darken($off,10%);
 	$off-verydark:		darken($off,15%);
+
+
 $support:				rgba(169,136,189,1);
 	$support-light:		lighten($support,10%);
 	$support-verylight:	lighten($support,15%);
 	$support-dark:		darken($support,10%);
 	$support-verydark:	darken($support,20%);
+
+
+$grey:					rgba(189,177,155,1);
+	$grey-light:		lighten($grey,10%);
+	$grey-verylight:	lighten($grey,20%);
+	$grey-dark:			darken($grey,10%);
+	$grey-verydark:		darken($grey,20%);
+
+
+$green:					rgba(70,255,134,1);
+	$green-light:		lighten($green,15%);
+	$green-verylight:	lighten($green,25%);
+	$green-dark:		darken($green,20%);
+	$green-verydark:	darken($green,30%);
+
 

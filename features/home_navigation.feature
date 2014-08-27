@@ -24,3 +24,13 @@ Background:
   	Then I should not see the text "Register" in the element "#session-options"
   	And I should not see the text "Login" in the element "#session-options"
   	And I should see the text "Logout" in the element "#session-options"
+
+
+
+
+#----- USER VALIDATIONS
+#----------------------
+
+  Scenario: A non logged in user attempts to view the dashboard
+    When I go to the "dashboard" page
+    Then I should see a flash "alert" of "You must be logged in to do that."

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :schools
+
   root :to => 'home#index'
 
   #-----HOME NAVIGATION

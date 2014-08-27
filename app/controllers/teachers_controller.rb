@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
 
+  before_action :require_logged_in_teacher, only: [:dashboard, :edit, :update]
   before_action :disallow_logged_in_teacher, only: [:new, :create]
 
   def index
@@ -20,7 +21,8 @@ class TeachersController < ApplicationController
 
     @teacher = Teacher.new(teacher_params)
     if @teacher.save
-      redirect_to dashboard_path, :notice => "Sign up successful.  Welcome to Schologue!"
+      session[:teacher_id] = @teacher.id
+      redirect_to dashboard_path, :notice => "Sign up successful.  Welcome to Academer!"
     else
       render "new"
     end
@@ -28,6 +30,7 @@ class TeachersController < ApplicationController
   end
 
   def dashboard
+    @teacher_schools = current_teacher.schools
   end
 
 

@@ -36,4 +36,10 @@ $green:					rgba(70,255,134,1);
 	$green-dark:		darken($green,20%);
 	$green-verydark:	darken($green,30%);
 
+$red:					rgba(200,0,0,1);
+	$red-light:			lighten($red,15%);
+	$red-verylight:		lighten($red,25%);
+	$red-dark:			darken($red,20%);
+	$red-verydark:		darken($red,30%);
+
 

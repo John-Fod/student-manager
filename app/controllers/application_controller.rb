@@ -16,6 +16,14 @@ class ApplicationController < ActionController::Base
   helper_method :current_teacher
 
 
+  #- Send a user to the home page if they aren't logged in
+  def require_logged_in_teacher alert="You must be logged in to do that."
+    unless current_teacher
+      redirect_to home_path, :alert => "#{alert}"
+    end
+  end
+  helper_method :require_logged_in_teacher
+
   #- Send a teacher to the dashboard if they are logged in
   def disallow_logged_in_teacher alert="You must first log out to do that."
   	if current_teacher

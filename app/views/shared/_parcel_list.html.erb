@@ -1,0 +1,9 @@
+<ul class="parcel-list">
+	<% if entries %>
+		<% entries.each do |entry| %>
+			<li><%= parcel_for(entry) %></li>
+		<% end %>
+	<% else %>
+		<aside class="nothing-found">Nothing was found.</aside>
+	<% end %>
+</ul>

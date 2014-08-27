@@ -10,6 +10,14 @@ Given (/^the following teachers:$/) do |table|
 	end
 end
 
+# MAKING SCHOOLS
+Given (/^the following schools:$/) do |table|
+	table.hashes.each do |attributes|
+		attributes[:headmaster] = Teacher.find_by_teachername("#{attributes[:headmaster]}")
+		FactoryGirl.create(:school, attributes)
+	end
+end
+
 
 
 # LOGGING IN AS A TEACHER
@@ -66,6 +74,12 @@ end
 # ASSERT I AM ON A PAGE
 Then(/^I should be on the "(.*?)" page$/) do |path_name|
 	assert page.current_path == "#{path_name}"
+end
+
+
+# PAGE TITLE
+Then(/^I should see a page title of "(.*?)"$/) do |page_title|
+	find("#page-header").should have_content("#{page_title}")
 end
 
 

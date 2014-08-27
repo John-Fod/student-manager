@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Acadorize</title>
+  <title>Academer</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -13,7 +13,7 @@
 
 	<%- #-----THE HEADER----- %>
 	<header id="layout-header">
-		<h4 id="layout-title">Acadorize</h4>
+		<h4 id="layout-title">Academer</h4>
 
 		<ul id="session-options">
 			<% if current_teacher %>
@@ -51,6 +51,7 @@
 
 			<ul>
 				<li><%= link_to "Home", home_path %></li>
+				<li><%= link_to "Schools", schools_path %></li>
 				<li><%= link_to "Contact", contact_path %></li>
 			</ul>
 

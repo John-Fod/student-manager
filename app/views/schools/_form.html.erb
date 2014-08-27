@@ -1,0 +1,36 @@
+<%= form_for(@school) do |f| %>
+  <% if @school.errors.any? %>
+    <div class="error-messages">
+      <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h2>
+      <ul>
+      <% @school.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-fields">
+    <ul>
+      <li class="input-field">
+        <%= f.label :headmaster_id %>
+        <%= f.number_field :headmaster_id %>
+      </li>
+
+      <li class="input-field">
+        <%= f.label :name, "School Name" %>
+        <%= f.text_field :name %>
+      </li>
+
+      <li class="input-field">
+        <%= f.label :summary, "School Summary" %>
+        <%= f.text_area :summary %>
+      </li>
+
+      <li class="submit-field">
+        <%= f.submit "Found School", :id => "commit" %>
+      </li>
+    </ul>
+  </div>
+
+<% end %>

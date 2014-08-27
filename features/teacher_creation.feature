@@ -17,7 +17,7 @@ Background:
     And I fill in "teacher_password_confirmation" with "123"
     And I fill in "teacher_teachername" with "John"
     And I press "commit"
-    Then I should see a flash "notice" of "Sign up successful.  Welcome to Schologue!"
+    Then I should see a flash "notice" of "Sign up successful.  Welcome to Academer!"
 
 
 

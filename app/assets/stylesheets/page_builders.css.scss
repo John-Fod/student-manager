@@ -1,0 +1,37 @@
+@import 'colors';
+@import 'text';
+/**************************************
+*****THE BASIC PAGE BUILDERS***********
+**************************************/
+
+/*************************
+-SECTIONS
+
+
+
+
+*************************/
+
+
+/****SECTIONS
+************/
+section.standard{
+	background-color:						white;
+	padding:										5px 3px;
+	border:											1px solid $support-light;
+
+	.section-header{
+		margin:										0px 0px 0px -3px;
+		padding-left:							3px;
+		display:									inline-block;
+		border-bottom:						1px solid $support-light;
+		line-height:							1em;
+		font-family:							$sans;
+		font-weight:							bold;
+		color:										$support-verydark;
+
+		h3{
+			color:red;
+		}
+	}
+}

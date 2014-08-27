@@ -12,6 +12,8 @@ class Teacher < ActiveRecord::Base
 	validates :teachername, :presence => true, :uniqueness => true, :length => {:in => 2..25}
 	validates :email, presence: true, :uniqueness => true, format: { with: VALID_EMAIL_REGEX }
 
+	has_many :schools, :foreign_key => 'headmaster_id'
+
 
 	#-----METHODS
 	#------------

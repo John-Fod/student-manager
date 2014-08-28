@@ -9,5 +9,10 @@ class School < ActiveRecord::Base
 	#-----METHODS
 	#------------
 
+	#-CHECK IF A USER CAN EDIT A USER OBJECT
+	def editable_by? editor
+		return true if((editor)&&(self.headmaster==editor))
+	end
+
 
 end

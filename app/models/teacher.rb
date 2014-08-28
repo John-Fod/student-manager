@@ -45,10 +45,4 @@ class Teacher < ActiveRecord::Base
 		return true if((editor)&&(self==editor))
 	end
 
-
-	#-THE EDIT PATH
-	def edit_path
-		edit_teacher_path(self)
-	end
-
 end

@@ -5,7 +5,7 @@ Feature: Teacher login
 
 Background:
   Given the following teachers:
-    | teachername  | email                |
+    | name  | email                |
     | Akahige      | akahige@gmail.com    |
 
 
@@ -20,7 +20,7 @@ Background:
     And I press "commit"
     Then I should see a flash "notice" of "Login successful."
 
-  Scenario: A non logged in user logs in as a teacher with a teachername
+  Scenario: A non logged in user logs in as a teacher with a name
     When I am on the "new_session" page
     And I fill in "email" with "Akahige"
     And I fill in "password" with "123"

@@ -1,2 +1,31 @@
-<h1>Teachers#edit</h1>
-<p>Find me in app/views/teachers/edit.html.erb</p>
+<h1>Edit</h1>
+
+
+<%= form_for @teacher do |f| %>
+
+	<%- #-----ERROR MESSAGES %>
+	<% if @teacher.errors.any? %>
+		<div class="error-messages">
+			<h2>Invalid Teacher</h2>
+			<ul>
+				<% for message in @teacher.errors.full_messages %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="form-fields">
+		<ul>
+			<li class="input-field">
+				<%= f.label :name, "Teacher Name" %>
+				<%= f.text_field :name %>
+			</li>
+			<li class="submit-field">
+				<%= f.submit "Register", :id => "commit" %>
+			</li>
+		</ul>
+	</div>
+
+
+<% end %>

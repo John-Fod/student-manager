@@ -10,10 +10,11 @@ Given (/^the following teachers:$/) do |table|
 	end
 end
 
+
 # MAKING SCHOOLS
 Given (/^the following schools:$/) do |table|
 	table.hashes.each do |attributes|
-		attributes[:headmaster] = Teacher.find_by_teachername("#{attributes[:headmaster]}")
+		attributes[:headmaster] = Teacher.find_by_name("#{attributes[:headmaster]}")
 		FactoryGirl.create(:school, attributes)
 	end
 end

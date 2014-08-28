@@ -5,7 +5,7 @@ Feature: School Creation
 
 Background:
   Given the following teachers:
-    | teachername  | email                |
+    | name        | email                |
     | Akahige      | akahige@gmail.com    |
 
   Given the following schools:

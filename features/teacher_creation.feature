@@ -15,7 +15,7 @@ Background:
     And I fill in "teacher_email" with "john@gmail.com"
     And I fill in "teacher_password" with "123"
     And I fill in "teacher_password_confirmation" with "123"
-    And I fill in "teacher_teachername" with "John"
+    And I fill in "teacher_name" with "John"
     And I press "commit"
     Then I should see a flash "notice" of "Sign up successful.  Welcome to Academer!"
 
@@ -29,7 +29,7 @@ Background:
     And I fill in "teacher_email" with ""
     And I fill in "teacher_password" with "123"
     And I fill in "teacher_password_confirmation" with "123"
-    And I fill in "teacher_teachername" with "John"
+    And I fill in "teacher_name" with "John"
     And I press "commit"
     Then I should see an error message of "Email can't be blank"
 
@@ -38,37 +38,37 @@ Background:
     And I fill in "teacher_email" with "twenty-one"
     And I fill in "teacher_password" with "123"
     And I fill in "teacher_password_confirmation" with "123"
-    And I fill in "teacher_teachername" with "John"
+    And I fill in "teacher_name" with "John"
     And I press "commit"
     Then I should see an error message of "Email is invalid"
 
   Scenario: A non logged in user attempts to register as a teacher with an unavailable email address
     Given the following teachers:
-      | teachername  | email                |
+      | name        | email                |
       | Akahige      | akahige@gmail.com    |
     When I am on the "new_teacher" page
     And I fill in "teacher_email" with "akahige@gmail.com"
     And I fill in "teacher_password" with "123"
     And I fill in "teacher_password_confirmation" with "123"
-    And I fill in "teacher_teachername" with "John"
+    And I fill in "teacher_name" with "John"
     And I press "commit"
     Then I should see an error message of "Email has already been taken"
 
-  Scenario: A non logged in user attempts to register as a teacher without a teachername
+  Scenario: A non logged in user attempts to register as a teacher without a name
     When I am on the "new_teacher" page
     And I fill in "teacher_email" with "akahige@gmail.com "
     And I fill in "teacher_password" with "123"
     And I fill in "teacher_password_confirmation" with "123"
-    And I fill in "teacher_teachername" with ""
+    And I fill in "teacher_name" with ""
     And I press "commit"
-    Then I should see an error message of "Teachername can't be blank"
+    Then I should see an error message of "Name can't be blank"
 
   Scenario: A non logged in user attempts to register as a teacher without a password
     When I am on the "new_teacher" page
     And I fill in "teacher_email" with "akahige@gmail.com "
     And I fill in "teacher_password" with ""
     And I fill in "teacher_password_confirmation" with "123"
-    And I fill in "teacher_teachername" with "John"
+    And I fill in "teacher_name" with "John"
     And I press "commit"
     Then I should see an error message of "Password can't be blank"
 
@@ -77,7 +77,7 @@ Background:
     And I fill in "teacher_email" with "akahige@gmail.com "
     And I fill in "teacher_password" with "1"
     And I fill in "teacher_password_confirmation" with "1"
-    And I fill in "teacher_teachername" with "John"
+    And I fill in "teacher_name" with "John"
     And I press "commit"
     Then I should see an error message of "Password is too short"
 
@@ -86,7 +86,7 @@ Background:
     And I fill in "teacher_email" with "akahige@gmail.com "
     And I fill in "teacher_password" with "123"
     And I fill in "teacher_password_confirmation" with "456"
-    And I fill in "teacher_teachername" with "John"
+    And I fill in "teacher_name" with "John"
     And I press "commit"
     Then I should see an error message of "Password confirmation doesn't match Password"
 
@@ -97,7 +97,7 @@ Background:
 
   Scenario: A logged in user attempts to register as a teacher
     Given the following teachers:
-      | teachername  | email                |
+      | name        | email                |
       | Akahige      | akahige@gmail.com    |
     And I am logged in as "akahige@gmail.com"
     When I am on the "new_teacher" page

@@ -1,5 +1,11 @@
 <div class="five columns alpha">
 
+	<%-#--TEACHER'S VITAL INFO--%>
+	<header id="page-header" class="teacher-header">
+		<h1 class="section-header"><%= current_teacher.name %></h1>
+		<%= link_to "Edit", edit_teacher_path(current_teacher), {:class => "edit-link"} %>
+	</section>
+
 	<%-#--TEACHER'S SCHOOLS--%>
 	<section class="standard parcel-list-holder">
 		<h3 class="section-header">Your Schools</h3>

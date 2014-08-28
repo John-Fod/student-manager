@@ -5,7 +5,7 @@ Feature: Teacher logout
 
 Background:
   Given the following teachers:
-    | teachername  | email                |
+    | name        | email                |
     | Akahige      | akahige@gmail.com    |
 
 

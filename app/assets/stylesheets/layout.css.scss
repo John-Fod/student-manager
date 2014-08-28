@@ -32,6 +32,15 @@
 			font-weight:					bold;
 			display:							inline-block;
 			vertical-align:				top;
+
+			a{
+				color:							$base-verylight;
+				text-decoration:		none;
+
+				&:hover{
+					text-decoration:	underline;
+				}
+			}
 		}
 
 		#session-options{

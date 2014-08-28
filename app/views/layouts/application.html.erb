@@ -13,7 +13,15 @@
 
 	<%- #-----THE HEADER----- %>
 	<header id="layout-header">
-		<h4 id="layout-title">Academer</h4>
+		<h4 id="layout-title"><%= link_to "Academer", home_path %></h4>
+
+		<nav id="layout-top-navigation-holder">
+			<ul id="layout-top-navigation">
+				<% if current_teacher %>
+					<li><%= link_to "#{current_teacher.name}", dashboard_path %></li>
+				<% end %>
+			</ul>
+		</nav>
 
 		<ul id="session-options">
 			<% if current_teacher %>

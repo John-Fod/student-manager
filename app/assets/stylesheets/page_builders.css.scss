@@ -17,18 +17,24 @@
 ************/
 section.standard{
 	background-color:						white;
-	padding:										5px 3px;
+	padding:										0px 3px 5px 3px;
 	border:											1px solid $support-light;
+	margin-bottom:							5px;
 
 	.section-header{
 		margin:										0px 0px 0px -3px;
-		padding-left:							3px;
+		padding:									2px 5px 2px 3px;
+		background-color:					lighten($support-verylight,15%);
 		display:									inline-block;
+		border-right:							1px solid $support-light;
 		border-bottom:						1px solid $support-light;
 		line-height:							1em;
 		font-family:							$sans;
+		font-size:								14px;
 		font-weight:							bold;
 		color:										$support-verydark;
+		position:									relative;
+		top:											-1px;
 
 		h3{
 			color:red;

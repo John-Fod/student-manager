@@ -16,13 +16,13 @@ end
 #---------------------------
 
 # VISIT AN EDIT PAGE
-When(/^I visit the edit school page for "(.*?)"$/) do |school_name|
+When(/^I am on the edit school page for "(.*?)"$/) do |school_name|
   school = School.find_by_name("#{school_name}")
   visit edit_school_path(school)
 end
 
 # VISIT A DELETE PAGE
-When(/^I visit the delete school page for "(.*?)"$/) do |school_name|
+When(/^I am on the delete school page for "(.*?)"$/) do |school_name|
 	school = School.find_by_name("#{school_name}")
 	visit delete_school_path(school)
 end

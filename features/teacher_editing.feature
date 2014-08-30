@@ -15,7 +15,7 @@ Background:
 
   Scenario: A logged in teacher edits his profile
     Given I am logged in as "akahige@gmail.com"
-    When I visit the edit teacher page for "Akahige"
+    When I am on the edit teacher page for "Akahige"
     And I fill in "teacher_name" with "John"
     And I press "commit"
     Then I should see a page title of "John"
@@ -28,7 +28,7 @@ Background:
 
   Scenario: A logged in teacher edits his profile with no name
     Given I am logged in as "akahige@gmail.com"
-    When I visit the edit teacher page for "Akahige"
+    When I am on the edit teacher page for "Akahige"
     And I fill in "teacher_name" with ""
     And I press "commit"
     Then I should see an error message of "Name can't be blank"
@@ -39,7 +39,7 @@ Background:
 #----------------------
 
   Scenario: A non logged in user attempts to edit a teacher
-    When I visit the edit teacher page for "Akahige"
+    When I am on the edit teacher page for "Akahige"
     Then I should see a flash "alert" of "You must be logged in to do that."
 
   Scenario: A logged in user attempts to edit another teacher
@@ -47,5 +47,5 @@ Background:
       | name          | email                |
       | John      | john@gmail.com    |
     And I am logged in as "john@gmail.com"
-    When I visit the edit teacher page for "Akahige"
+    When I am on the edit teacher page for "Akahige"
     Then I should see a flash "alert" of "You do not have permission to edit that teacher."

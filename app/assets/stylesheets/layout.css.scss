@@ -21,7 +21,7 @@
 	background-color:					$support;
 	color:										$off-verylight;
 	width:										100%;
-	margin-bottom:								10px;
+	margin-bottom:						10px;
 
 	#layout-header{
 		position:								relative;
@@ -65,6 +65,30 @@
 
 				&:hover{
 					text-decoration:	underline;
+				}
+			}
+		}
+	}
+
+	#layout-top-navigation-holder{
+		display:								inline-block;
+
+		ul{
+
+			li{
+				display:						inline-block;
+
+				a{
+					display:					block;
+					color:						$base-verylight;
+					font-weight:			bold;
+					font-family:			$sans;
+					font-size:				16px;
+					text-decoration:	none;
+
+					&:hover{
+						text-decoration:	underline;
+					}
 				}
 			}
 		}

@@ -13,6 +13,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1
   # GET /schools/1.json
   def show
+    @school_students = @school.students
   end
 
   # GET /schools/new
@@ -81,9 +82,9 @@ class SchoolsController < ApplicationController
     end
 
     def require_valid_school_editor
-    unless @school.editable_by? current_teacher
-      redirect_to schools_path, :alert => "You do not have permission to edit that school."
-    end
+      unless @school.editable_by? current_teacher
+        redirect_to schools_path, :alert => "You do not have permission to edit that school."
+      end
     end
 
 end

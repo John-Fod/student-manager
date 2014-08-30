@@ -18,7 +18,7 @@ Background:
 
   Scenario: A teacher edits his school
   	Given I am logged in as "akahige@gmail.com"
-  	When I visit the edit school page for "Akahige's School"
+  	When I am on the edit school page for "Akahige's School"
   	And I fill in "school_name" with "Akahige's Top English Super School"
   	And I fill in "school_summary" with "This school only teaches English."
   	And I press "commit"
@@ -31,7 +31,7 @@ Background:
 
   Scenario: A teacher attemtpts to edit his school to have no name
   	Given I am logged in as "akahige@gmail.com"
-  	When I visit the edit school page for "Akahige's School"
+  	When I am on the edit school page for "Akahige's School"
   	And I fill in "school_name" with ""
   	And I fill in "school_summary" with "This school only teaches English."
   	And I press "commit"
@@ -42,7 +42,7 @@ Background:
 #----------------------
 
   Scenario: A non logged in user attempts to edit a school
-  	When I visit the edit school page for "Akahige's School"
+  	When I am on the edit school page for "Akahige's School"
   	Then I should see a flash "alert" of "You must be logged in to do that."
 
   Scenario: A teacher attempts to edit a school that isn't his
@@ -50,5 +50,5 @@ Background:
   		| name        | email                |
   		| John      | john@gmail.com   |
   	And I am logged in as "john@gmail.com"
-  	When I visit the edit school page for "Akahige's School"
+  	When I am on the edit school page for "Akahige's School"
   	Then I should see a flash "alert" of "You do not have permission to edit that school."

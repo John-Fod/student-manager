@@ -1,0 +1,19 @@
+<div class="eleven columns alpha">
+
+	<% if @school %>
+		<%= render 'schools/header', :entry => @school, :subtitle => "New Student" %>
+	<% else %>
+		<header id="page-header" class="teacher-header page-header">
+			<h1 class="section-header">New Student</h1>
+		</header>
+	<% end %>
+
+	<%-#--THE FORM FOR A STUDENT--%>
+	<%= render 'form' %>
+</div>
+
+
+<div class="five columns omega">
+
+
+</div>

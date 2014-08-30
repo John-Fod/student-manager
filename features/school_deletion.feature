@@ -18,7 +18,7 @@ Background:
 
   Scenario: A headmaster deletes a school
   	Given I am logged in as "akahige@gmail.com"
-  	When I visit the delete school page for "Akahige's School"
+  	When I am on the delete school page for "Akahige's School"
   	And I follow "confirm_deletion"
   	Then I should see a flash "notice" of "School deletion successful."
 
@@ -27,5 +27,5 @@ Background:
 #----------------------
 
   Scenario: A non logged in user attempts to delete a school
-  	When I visit the delete school page for "Akahige's School"
+  	When I am on the delete school page for "Akahige's School"
     Then I should see a flash "alert" of "You must be logged in to do that."

@@ -1,9 +1,29 @@
 <div class="five columns alpha">
 
 	<%-#--TEACHER'S VITAL INFO--%>
-	<header id="page-header" class="teacher-header">
-		<h1 class="section-header"><%= current_teacher.name %></h1>
-		<%= link_to "Edit", edit_teacher_path(current_teacher), {:class => "edit-link"} %>
+	<%= render 'header', :entry => current_teacher, :subtitle => "Dashboard" %>
+
+	<%-#--TEACHER ACTIONS--%>
+	<section class="standard actions">
+		<h3 class="section-header">Actions</h3>
+		<ul class="actions-list">
+			<li><%= link_to "Edit Account", edit_teacher_path(current_teacher) %></li>
+			<li><%= link_to "New School", new_school_path %></li>
+		</ul>
+	</section>
+
+	<%-#--EDIT TEACHER AND QUICK INFO--%>
+	<section class="standard quick-info-holder">
+		<h3 class="section-header">Your Account</h3>
+		<dl class="quick-info">
+			<dt>Schools</dt>
+				<dd><%= current_teacher.schools.count %></dd>
+			<dt>Activities</dt>
+				<dd>123</dd>
+			<dt>Created</dt>
+				<dd><%= current_teacher.created_at.strftime("%b %d, %Y") %><dd>
+
+		</dl>
 	</section>
 
 	<%-#--TEACHER'S SCHOOLS--%>

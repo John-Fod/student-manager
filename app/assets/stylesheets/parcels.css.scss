@@ -1,0 +1,53 @@
+@import 'colors';
+@import 'text';
+/**********************
+*****PARCELS***********
+**********************/
+
+/*************************
+-PARCELS
+
+
+
+
+*************************/
+
+
+/****PARCELS
+***********/
+
+.parcel{
+	border:											1px solid $base-light;
+	padding:										3px 5px;
+	margin:											0px 3px;
+
+	header{
+		display:									block;
+		width:										100%;
+
+		h4{
+			margin:									0px;
+			font-size:							14px;
+			font-weight:						bold;
+			font-family:						$serifs;
+			color:									$support-verydark;
+			line-height:						inherit;
+
+			a{
+				color:								inherit;
+				text-decoration:			none;
+
+				&:hover{
+					text-decoration:		underline;
+				}
+			}
+		}
+	}
+
+	>div{
+
+		dl{
+			margin-left:						20px;
+		}
+	}
+}

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :students
+
   resources :schools
 
   root :to => 'home#index'
@@ -19,6 +21,10 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'teachers#dashboard', as: 'dashboard'
   get '/login', to: 'sessions#new', as: 'login'
   get '/logout', to: 'sessions#destroy', as: 'logout'
+
+
+  #-----SPECIAL PATHS
+  get '/schools/:id/students/new', to: 'students#new', as: 'new_school_student'
 
 
 

@@ -118,6 +118,26 @@
 	li { margin-bottom: 0px; }
 	ul.large li { line-height: 21px; }
 
+	dl{
+		overflow:				hidden;
+		dt,
+		dd{
+			vertical-align:		baseline;
+			font-size:			12px;
+			line-height:		16px;
+		}
+		dt{
+			font-weight: 		bold;
+			color:				darken(mix($support-verydark,$grey-verydark),20%);
+			margin-right:		5px;
+			float:				left; 
+		}
+		dd{
+			font-style:			italic;
+			color:				mix($support-dark,$grey-dark);
+		}
+	}
+
 /* #Images
 ================================================== */
 

@@ -1,17 +1,25 @@
 <div class="five columns alpha">
 
 	<%-#--SCHOOL'S HEADER--%>
-	<div id="page-header">
-		<%= render 'header', :entry => @school %>
-	</div>
+	<%= render 'header', :entry => @school %>
 
-	<%-#--SCHOOL'S EDITOR MENU--%>
+	<%-#--HEADMASTER'S ACTIONS--%>
 	<% if @school.editable_by? current_teacher %>
-		<section class="standard editor">
-
-			<%= link_to "Delete", delete_school_path(@school) %>
+		<section class="standard actions">
+			<h3 class="section-header">Actions</h3>
+			<ul class="actions-list">
+				<li><%= link_to "Edit School", edit_school_path(@school) %></li>
+				<li><%= link_to "New Student", new_school_student_path(@school) %></li>
+			</ul>
 		</section>
 	<% end %>
+
+	<%-#--SCHOOL'S STUDENTS--%>
+	<section class="standard parcel-list-holder">
+		<h3 class="section-header">Schools</h3>
+		<%= render 'shared/parcel_list', :entries => @school_students %>
+	</section>
+	
 
 </div>
 

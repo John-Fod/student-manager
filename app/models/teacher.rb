@@ -41,7 +41,7 @@ class Teacher < ActiveRecord::Base
 
 
 	#-CHECK IF A USER CAN EDIT A USER OBJECT
-	def editable_by? editor
+	def editable_by? editor=nil
 		return true if((editor)&&(self==editor))
 	end
 

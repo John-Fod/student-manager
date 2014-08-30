@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   get 'contact', to: 'home#contact', as: 'contact'
 
 
+  #-----DELETION PAGES
+  get '/schools/:id/delete', to: 'schools#delete', as: 'delete_school'
+
+
   #-----TEACHER AND SESSION NAVIGATION
   resources :teachers
   resources :sessions

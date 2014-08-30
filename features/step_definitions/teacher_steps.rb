@@ -1,6 +1,12 @@
 #GIVEN
 #---------------------------
 
+# MAKING TEACHERS
+Given (/^the following teachers:$/) do |table|
+	table.hashes.each do |attributes|
+		FactoryGirl.create(:teacher, attributes)
+	end
+end
 
 
 

@@ -5,6 +5,14 @@
 		<%= render 'header', :entry => @school %>
 	</div>
 
+	<%-#--SCHOOL'S EDITOR MENU--%>
+	<% if @school.editable_by? current_teacher %>
+		<section class="standard editor">
+
+			<%= link_to "Delete", delete_school_path(@school) %>
+		</section>
+	<% end %>
+
 </div>
 
 <div class="eleven columns omega">

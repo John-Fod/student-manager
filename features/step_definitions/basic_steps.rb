@@ -2,25 +2,6 @@
 #---------------------------
 
 
-
-# MAKING TEACHERS
-Given (/^the following teachers:$/) do |table|
-	table.hashes.each do |attributes|
-		FactoryGirl.create(:teacher, attributes)
-	end
-end
-
-
-# MAKING SCHOOLS
-Given (/^the following schools:$/) do |table|
-	table.hashes.each do |attributes|
-		attributes[:headmaster] = Teacher.find_by_name("#{attributes[:headmaster]}")
-		FactoryGirl.create(:school, attributes)
-	end
-end
-
-
-
 # LOGGING IN AS A TEACHER
 Given (/^I am logged in as "(.*?)"$/) do |email|
 	visit(login_path)
@@ -58,6 +39,12 @@ end
 # PRESS THE BUTTON ON A FORM
 When(/^I press "(.*?)"$/) do |button_name|
 	click_button("#{button_name}")
+end
+
+
+# FOLLOW A LINK
+When(/^I follow "(.*?)"$/) do |link_id|
+	click_link("#{link_id}")
 end
 
 

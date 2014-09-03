@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
 
+  
+
+  resources :courses
+
   resources :students
 
-  resources :schools
+  resources :schools do
+    resources :rooms
+  end
 
   root :to => 'home#index'
 
@@ -18,6 +24,7 @@ Rails.application.routes.draw do
   #-----TEACHER AND SESSION NAVIGATION
   resources :teachers
   resources :sessions
+
   get '/dashboard', to: 'teachers#dashboard', as: 'dashboard'
   get '/login', to: 'sessions#new', as: 'login'
   get '/logout', to: 'sessions#destroy', as: 'logout'

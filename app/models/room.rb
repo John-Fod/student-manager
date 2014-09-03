@@ -1,20 +1,11 @@
-class Teacher < ActiveRecord::Base
+class Room < ActiveRecord::Base
 
-	attr_accessor :password
+	validates :name, :presence => true, :uniqueness => {:scope => :school_id}, :length => {:in => 2..25}
 
-	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+	belongs_to :school
+	belongs_to :founding_teacher, class_name: "Teacher", foreign_key: "founding_teacher_id"
 
-	before_save :encrypt_password
-
-	validates_confirmation_of :password
-
-	validates :password, :presence => true, :length => {:in => 3..25}, :on => :create
-	validates :name, :presence => true, :uniqueness => true, :length => {:in => 2..25}
-	validates :email, presence: true, :uniqueness => true, format: { with: VALID_EMAIL_REGEX }
-
-	has_many :schools, :foreign_key => 'headmaster_id'
-
-	has_and_belongs_to_many :rooms
+	has_and_belongs_to_many :teachers
 
 
 	#-----METHODS
@@ -46,5 +37,4 @@ class Teacher < ActiveRecord::Base
 	def editable_by? editor=nil
 		return true if((editor)&&(self==editor))
 	end
-
 end

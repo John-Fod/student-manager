@@ -6,6 +6,7 @@ class School < ActiveRecord::Base
 	belongs_to :headmaster, class_name: "Teacher", foreign_key: "headmaster_id"
 
 	has_and_belongs_to_many :students
+	has_and_belongs_to_many :courses
 
 
 	#-----METHODS

@@ -252,10 +252,13 @@
 	textarea {
 		min-height: 60px; }
 	label,
-	legend {
+	legend,
+	.fake-label {
 		display: block;
 		font-weight: bold;
-		font-size: 13px;  }
+		font-size: 14px;
+		color: darken($support-verydark,10%);
+		margin-bottom: 5px;  }
 	select {
 		width: 220px; }
 	input[type="checkbox"] {

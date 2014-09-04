@@ -7,6 +7,7 @@
 /*************************
 -SECTIONS
 -HEADERS
+-BANNERS
 -ACTIONS
 
 
@@ -73,6 +74,36 @@ section.standard{
 		}
 	}
 
+}
+
+
+/****BANNERS
+***********/
+.banner{
+	border:											1px solid $support-dark;
+	margin-bottom:							5px;
+	background-color:						$grey-verydark;
+
+	span{
+		display:									block;
+		width:										100%;
+		height:										100%;
+		padding:									5px 0px;
+		text-align:								center;
+		background-color:					lighten($support-verylight,10%);
+
+		&:hover{
+			background-color:				lighten($support-verylight,15%);
+		}
+
+		a{
+			text-decoration:				none;
+			color:									$support-verydark;
+			font-weight:						bold;
+			font-family:						$serifs;
+			font-size:							18px;
+		}
+	}
 }
 
 

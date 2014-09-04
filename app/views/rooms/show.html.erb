@@ -1,21 +1,31 @@
-<%= render 'header', :entry => @room %>
+<div class="five columns alpha">
 
-<p>
-  <strong>Name:</strong>
-  <%= @room.name %>
-</p>
+	<%-#--SCHOOLS' BANNER--%>
+	<%= render 'schools/banner', :entry => @school %>
 
-<p>
-  <strong>Summary:</strong>
-  <%= @room.summary %>
-</p>
+	<%-#--ROOMS'S HEADER--%>
+	<%= render 'header', :entry => @room %>
 
-<p>
-  <strong>School:</strong>
-  <%= @room.school_id %>
-</p>
+	<%-#--HEADMASTER'S ACTIONS--%>
+	<% if @school.editable_by? current_teacher %>
+		<section class="standard actions">
+			<h3 class="section-header">Actions</h3>
+			<ul class="actions-list">
+				<li><%= link_to "Edit Room", edit_school_room_path(@school, @room) %></li>
+				<li><%= link_to "Delete Room", delete_school_room_path(@school, @room) %></li>
+			</ul>
+		</section>
+	<% end %>	
 
-<p>
-  <strong>Founding teacher:</strong>
-  <%= @room.founding_teacher_id %>
-</p>
+</div>
+
+<div class="eleven columns omega">
+
+
+	<%-#--ROOM'S STUDENTS--%>
+	<section class="standard parcel-list-holder">
+		<h3 class="section-header">Students</h3>
+		<%= render 'shared/parcel_list', :entries => @room_students %>
+	</section>
+
+</div>

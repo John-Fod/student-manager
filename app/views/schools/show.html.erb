@@ -17,8 +17,14 @@
 
 	<%-#--SCHOOL'S STUDENTS--%>
 	<section class="standard parcel-list-holder">
-		<h3 class="section-header">Schools</h3>
+		<h3 class="section-header">Students</h3>
 		<%= render 'shared/parcel_list', :entries => @school_students %>
+	</section>
+
+	<%-#--SCHOOL'S ROOMS--%>
+	<section class="standard parcel-list-holder">
+		<h3 class="section-header">Rooms</h3>
+		<%= render 'shared/parcel_list', :entries => @school_rooms %>
 	</section>
 	
 

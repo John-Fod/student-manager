@@ -14,6 +14,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1.json
   def show
     @school_students = @school.students
+    @school_rooms = @school.rooms
   end
 
   # GET /schools/new

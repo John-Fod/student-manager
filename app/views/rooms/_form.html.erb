@@ -14,13 +14,27 @@
   <div class="form-fields">
     <ul>
       <li class="field">
-        <%= f.label :name %><br>
+        <%= f.label :name %>
         <%= f.text_field :name %>
       </li>
       <li class="field">
-        <%= f.label :summary %><br>
+        <%= f.label :summary %>
         <%= f.text_area :summary %>
       </li>
+      <%-#--SELECT STUDENTS FOR THE ROOM--%>
+      <% if @school.students.size > 0 %>
+      <%= hidden_field_tag("room[student_ids][]", nil) %>
+        <li class="field student checkboxes">
+          <h6 class="fake-label">Students</h6>
+          <ul>
+            <% @school.students.each do |student| %>
+              <li>
+                <label><%= check_box_tag("room[student_ids][]", student.id, student.in?(@room.students)) %> <%= student.name %></label>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
       <li class="actions">
         <%= f.hidden_field :school_id %>
         <%= f.hidden_field :founding_teacher_id %>

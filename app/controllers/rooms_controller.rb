@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
   before_action :set_school
   before_action :require_logged_in_teacher, only: [:new, :create, :edit, :update, :delete, :destroy]
-  before_action :require_valid_school_editor, only: [:edit, :update, :delete, :destroy]
+  before_action :require_valid_school_editor, only: [:new, :create, :edit, :update, :delete, :destroy]
 
   # GET /rooms
   # GET /rooms.json
@@ -14,6 +14,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1
   # GET /rooms/1.json
   def show
+    @room_students = @room.students
   end
 
   # GET /rooms/new
@@ -89,6 +90,6 @@ class RoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
-      params.require(:room).permit(:name, :summary, :school_id, :founding_teacher_id)
+      params.require(:room).permit(:name, :summary, :school_id, :founding_teacher_id, :student_ids => [])
     end
 end

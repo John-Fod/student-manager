@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   #-----DELETION PAGES
   get '/schools/:id/delete', to: 'schools#delete', as: 'delete_school'
+  get '/schools/:school_id/rooms/:id/delete', to: 'rooms#delete', as: 'delete_school_room'
 
 
   #-----TEACHER AND SESSION NAVIGATION

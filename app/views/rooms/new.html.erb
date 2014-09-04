@@ -1,4 +1,19 @@
-<h1>New room</h1>
+<div class="five columns alpha">
 
-<%= render 'form' %>
+	<%-#--SCHOOLS' BANNER--%>
+	<%= render 'schools/banner', :entry => @school %>
 
+	<%-#--ROOMS'S HEADER--%>
+	<%= render 'schools/header', :entry => @school, :subtitle => "New Room" %>
+
+</div>
+
+<div class="eleven columns omega">
+
+
+	<%-#--ROOM'S FORM--%>
+	<section class="standard form-holder">
+		<%= render 'form' %>
+	</section>
+
+</div>

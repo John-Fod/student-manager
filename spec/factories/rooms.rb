@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :room do
     name "MyString"
     summary "MyText"
-    school_id 1
-    founding_teacher_id 1
+    school School.last
+    founding_teacher Teacher.last
   end
 end

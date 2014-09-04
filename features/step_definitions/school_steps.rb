@@ -32,3 +32,9 @@ end
 
 #THEN
 #---------------------------
+
+# A BANNER FOR A SCHOOL SHOULD BE VISIBLE
+When(/^I should see a banner for the school "(.*?)"$/) do |school_name|
+	school = School.find_by_name("#{school_name}")
+	find(".banner span a").should have_content("#{school.name}")
+end

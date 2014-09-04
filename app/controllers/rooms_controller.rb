@@ -49,7 +49,7 @@ class RoomsController < ApplicationController
   def update
     respond_to do |format|
       if @room.update(room_params)
-        format.html { redirect_to school_room_path(@room.school,@room), notice: 'Room was successfully updated.' }
+        format.html { redirect_to school_room_path(@room.school,@room), notice: 'Room update successful.' }
         format.json { render :show, status: :ok, location: @room }
       else
         format.html { render :edit }
@@ -77,7 +77,7 @@ class RoomsController < ApplicationController
     end
 
     def set_school
-      unless @school = School.find_by_id(params[:school_id])
+      unless @school = get_school
         redirect_to schools_path, :alert => "That school does not exist."
       end
     end
@@ -92,4 +92,18 @@ class RoomsController < ApplicationController
     def room_params
       params.require(:room).permit(:name, :summary, :school_id, :founding_teacher_id, :student_ids => [])
     end
+
+
+    # WORKERS
+
+    def get_school
+      if @room.school
+        return @room.school
+      elsif ((params[:school_id])&&(school=School.find_by_id(params[:school_id])))
+        return school
+      else
+        return false
+      end        
+    end
+
 end

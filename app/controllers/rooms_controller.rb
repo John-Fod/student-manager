@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
 
-  before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :set_room, only: [:show, :edit, :update, :delete, :destroy]
   before_action :set_school
   before_action :require_logged_in_teacher, only: [:new, :create, :edit, :update, :delete, :destroy]
   before_action :require_valid_school_editor, only: [:new, :create, :edit, :update, :delete, :destroy]
@@ -58,6 +58,10 @@ class RoomsController < ApplicationController
     end
   end
 
+  def delete
+
+  end
+
   # DELETE /rooms/1
   # DELETE /rooms/1.json
   def destroy
@@ -97,7 +101,7 @@ class RoomsController < ApplicationController
     # WORKERS
 
     def get_school
-      if @room.school
+      if @room&&@room.school
         return @room.school
       elsif ((params[:school_id])&&(school=School.find_by_id(params[:school_id])))
         return school

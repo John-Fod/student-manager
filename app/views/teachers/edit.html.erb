@@ -1,31 +1,41 @@
-<h1>Edit</h1>
+<div class="five columns alpha">
+
+	<%-#--THE TEACHER'S HEADER--%>
+	<%= render 'header', :entry => @teacher, :subtitle => "Edit" %>
+
+</div>
 
 
-<%= form_for @teacher do |f| %>
+<div class="eleven columns omega">
 
-	<%- #-----ERROR MESSAGES %>
-	<% if @teacher.errors.any? %>
-		<div class="error-messages">
-			<h2>Invalid Teacher</h2>
+	<%-#--THE FORM--%>
+	<%= form_for @teacher do |f| %>
+
+		<%- #-----ERROR MESSAGES %>
+		<% if @teacher.errors.any? %>
+			<div class="error-messages">
+				<h2>Invalid Teacher</h2>
+				<ul>
+					<% for message in @teacher.errors.full_messages %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
+		<div class="form-fields">
 			<ul>
-				<% for message in @teacher.errors.full_messages %>
-					<li><%= message %></li>
-				<% end %>
+				<li class="input-field">
+					<%= f.label :name, "Teacher Name" %>
+					<%= f.text_field :name %>
+				</li>
+				<li class="submit-field">
+					<%= f.submit "Register", :id => "commit" %>
+				</li>
 			</ul>
 		</div>
+
+
 	<% end %>
 
-	<div class="form-fields">
-		<ul>
-			<li class="input-field">
-				<%= f.label :name, "Teacher Name" %>
-				<%= f.text_field :name %>
-			</li>
-			<li class="submit-field">
-				<%= f.submit "Register", :id => "commit" %>
-			</li>
-		</ul>
-	</div>
-
-
-<% end %>
+</div>

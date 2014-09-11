@@ -1,6 +1,17 @@
-<h1>Editing student</h1>
+<div class="five columns alpha">
 
-<%= render 'form' %>
+	<%-#-- THE SCHOOL'S BANNER--%>
+	<%= render 'schools/banner', :entry => @school %>
 
-<%= link_to 'Show', @student %> |
-<%= link_to 'Back', students_path %>
+	<%-#--THE STUDENTS' HEADER--%>
+	<%= render 'header', :entry => @student, :subtitle => "Edit" %>
+
+</div>
+
+
+<div class="eleven columns omega">
+
+	<%-#--THE FORM--%>
+	<%= render 'form' %>
+
+</div>

@@ -13,7 +13,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1
   # GET /schools/1.json
   def show
-    @school_students = @school.students
+    @school_students = @school.students.order(:name => :asc)
     @school_rooms = @school.rooms
   end
 

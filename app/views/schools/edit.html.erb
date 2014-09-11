@@ -1,6 +1,36 @@
-<h1>Editing school</h1>
+<div class="five columns alpha">
 
-<%= render 'form' %>
+	<%-#--SCHOOL'S HEADER--%>
+	<%= render 'header', :entry => @school, :subtitle => "Edit" %>
 
-<%= link_to 'Show', @school %> |
-<%= link_to 'Back', schools_path %>
+	<%-#--HEADMASTER'S ACTIONS--%>
+	<% if @school.editable_by? current_teacher %>
+		<section class="standard actions">
+			<h3 class="section-header">Actions</h3>
+			<ul class="actions-list">
+				<li><%= link_to "Edit School", edit_school_path(@school) %></li>
+				<li><%= link_to "New Room", new_school_room_path(@school) %></li>
+				<li><%= link_to "New Student", new_school_student_path(@school) %></li>
+			</ul>
+		</section>
+	<% end %>
+
+	<%-#--QUICK INFO--%>
+	<section class="standard quick-info-holder">
+		<h3 class="section-header">School Info</h3>
+		<dl class="quick-info">
+			<dt>Students</dt>
+				<dd><%= @school.students.count %></dd>
+			<dt>Rooms</dt>
+				<dd><%= @school.rooms.count %></dd>
+		</dl>
+	</section>
+	
+
+</div>
+
+<div class="eleven columns omega">
+
+	<%= render 'form' %>
+
+</div>

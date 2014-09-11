@@ -216,15 +216,15 @@
 ================================================== */
 
 	form {
-		margin-bottom: 20px; }
+		margin-bottom: 10px; }
 	fieldset {
-		margin-bottom: 20px; }
+		margin-bottom: 10px; }
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
 	textarea,
 	select {
-		border: 1px solid $support-dark;;
+		border: 1px solid $support-dark;
 		padding: 6px 4px;
 		outline: none;
 		-moz-border-radius: 2px;
@@ -250,7 +250,8 @@
 		-webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
 		box-shadow:  0 0 3px rgba(0,0,0,.2); }
 	textarea {
-		min-height: 60px; }
+		min-height: 100px; 
+		resize:	vertical;}
 	label,
 	legend,
 	.fake-label {

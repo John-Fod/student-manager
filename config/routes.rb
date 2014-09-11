@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
 
   #-----SPECIAL PATHS
-  get '/schools/:id/students/new', to: 'students#new', as: 'new_school_student'
+  get '/schools/:school_id/students/new', to: 'students#new', as: 'new_school_student'
 
 
 

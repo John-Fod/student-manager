@@ -15,6 +15,17 @@
 		</section>
 	<% end %>
 
+	<%-#--QUICK INFO--%>
+	<section class="standard quick-info-holder">
+		<h3 class="section-header">School Info</h3>
+		<dl class="quick-info">
+			<dt>Students</dt>
+				<dd><%= @school.students.count %></dd>
+			<dt>Rooms</dt>
+				<dd><%= @school.rooms.count %></dd>
+		</dl>
+	</section>
+
 	<%-#--SCHOOL'S STUDENTS--%>
 	<section class="standard parcel-list-holder">
 		<h3 class="section-header">Students</h3>

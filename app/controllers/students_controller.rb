@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   
   before_action :require_logged_in_teacher, only: [:new, :create, :edit, :update, :delete, :destroy]
   before_action :set_student, only: [:show, :edit, :update, :destroy]
-  before_action :set_school, only: [:new, :create]
+  before_action :set_school
   before_action :require_valid_school_editor, only: [:new, :create, :edit, :update]
 
   # GET /students
@@ -14,11 +14,13 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+    @student_schools = @student.schools.order(:name => :asc)
   end
 
   # GET /students/new
   def new
-    @student = Student.new
+    @student = Student.new unless @student
+    @student.school = @school
   end
 
   # GET /students/1/edit
@@ -50,7 +52,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+        format.html { redirect_to @student, notice: 'Student update successful.' }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit }
@@ -72,17 +74,22 @@ class StudentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
-      @student = Student.find(params[:id])
+      if @student = Student.find_by_id(params[:id])
+        @student
+      else
+        redirect_to students_path, :alert => "That student does not exist."
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:name, :about, :level)
+      params.require(:student).permit(:name, :about, :level, :school_id, :room_ids => [])
     end
 
     def set_school
-      @school = School.find_by_id(params[:id]) if params[:id]
-      @school = School.find_by_id(params[:school_id]) if params[:school_id]
+      unless @school = get_school
+        redirect_to schools_path, :alert => "That school does not exist."
+      end
     end
 
     def require_valid_school_editor
@@ -92,4 +99,21 @@ class StudentsController < ApplicationController
         end
       end
     end
+
+
+
+    # WORKERS
+
+    def get_school
+      if @student&&@student.school
+        return @student.school
+      elsif ((params[:school_id])&&(school=School.find_by_id(params[:school_id])))
+        return school
+      elsif ((params[:student][:school_id])&&(school=School.find_by_id(params[:student][:school_id])))
+        return school
+      else
+        return false
+      end        
+    end
+
 end

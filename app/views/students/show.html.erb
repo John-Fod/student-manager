@@ -3,6 +3,22 @@
 	<%-#--THE STUDENTS' HEADER--%>
 	<%= render 'header', :entry => @student %>
 
+	<%-#--EDITOR OPTIONS--%>
+	<% if @student.editable_by? current_teacher %>
+		<section class="standard actions">
+			<h3 class="section-header">Actions</h3>
+			<ul class="actions-list">
+				<li><%= link_to "Edit Student", edit_student_path(@student) %></li>
+			</ul>
+		</section>
+	<% end %>
+
+	<%-#--STUDENT'S SCHOOL--%>
+	<section class="standard parcel-list-holder">
+		<h3 class="section-header"><%= 'School'.pluralize(@student.schools.size) %></h3>
+		<%= render 'shared/parcel_list', :entries => @student_schools %>
+	</section>
+
 </div>
 
 

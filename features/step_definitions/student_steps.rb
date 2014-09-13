@@ -30,6 +30,15 @@ When(/^I am on the delete student page for "(.*?)"$/) do |student_name|
 	visit delete_student_path(student)
 end
 
+# VISIT A STUDENT'S PAGE
+When(/^I am on the page for the student "(.*?)"$/) do |student_name|
+	if student = Student.find_by_name("#{student_name}")
+		visit student_path(student)
+	else
+		visit student_path(0)
+	end
+end
+
 
 
 

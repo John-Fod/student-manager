@@ -17,15 +17,28 @@
 		</section>
 	<% end %>
 
-	<%-#--STUDENT'S SCHOOL--%>
+	<%-#--STUDENT'S ROOMS--%>
 	<section class="standard parcel-list-holder">
-		<h3 class="section-header"><%= 'School'.pluralize(@student.schools.size) %></h3>
-		<%= render 'shared/parcel_list', :entries => @student_schools %>
+		<h3 class="section-header"><%= 'Room'.pluralize(@student.rooms.size) %></h3>
+		<%= render 'shared/parcel_list', :entries => @student.rooms %>
 	</section>
 
 </div>
 
 
 <div class="eleven columns omega">
+
+	<section class="standard deletion-prompt">
+		<h1>Are you sure you want to delete <%= @student.name %>?</h1>
+		<p>Student deletion is <strong>permanent</strong>.  This student will be removed from their school and rooms.</p>
+			<ul>
+				<li>
+					<%= link_to "Delete", @student, method: :delete %>
+				</li>
+				<li>
+					<%= link_to "Back", student_path(@student) %>
+				</li>
+			</ul>
+	</section>
 
 </div>

@@ -29,3 +29,26 @@ Background:
   Scenario: A non logged in user attempts to delete a school
   	When I am on the delete school page for "Akahige's School"
     Then I should see a flash "alert" of "You must be logged in to do that."
+
+
+#---- STUDENTS AND ROOMS OF A DELETED SCHOOL
+#-------------------------------------------
+
+  Scenario: A headmaster deletes a school and the students of the school are deleted
+    Given the following students:
+      | name        | school              |
+      | Joe         | Akahige's School    |
+      | Mike        | Akahige's School    |
+    And I am logged in as "akahige@gmail.com"
+    And the school "Akahige's School" is deleted
+    When I am on the page for the student "Joe"
+    Then I should see a flash "alert" of "That student does not exist."
+
+  Scenario: A headmaster deletes a school and the rooms of the school are deleted
+    Given the following rooms:
+      | name        | school            | founding_teacher  |
+      | Room 1      | Akahige's School  | Akahige           |
+    And I am logged in as "akahige@gmail.com"
+    And the school "Akahige's School" is deleted
+    When I am on the page for the room "Room 1"
+    Then I should see a flash "alert" of "That room does not exist."

@@ -5,8 +5,8 @@ class School < ActiveRecord::Base
 
 	belongs_to :headmaster, class_name: "Teacher", foreign_key: "headmaster_id"
 
-	has_many :students
-	has_many :rooms
+	has_many :students, :dependent => :destroy
+	has_many :rooms, :dependent => :destroy
 
 	has_and_belongs_to_many :courses
 

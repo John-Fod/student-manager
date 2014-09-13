@@ -56,6 +56,16 @@ When(/^I am on the delete room page for "(.*?)"$/) do |room|
 end
 
 
+# VISIT A ROOMS'S PAGE
+When(/^I am on the page for the room "(.*?)"$/) do |room_name|
+	if room = Room.find_by_name("#{room_name}")
+		visit school_room_path(room.school, room)
+	else
+		visit school_room_path(0,0)
+	end
+end
+
+
 
 
 #THEN

@@ -10,6 +10,21 @@ Given (/^the following schools:$/) do |table|
 	end
 end
 
+# A SCHOOL IS DELETE
+Given (/^the school "(.*?)" is deleted$/) do |school_name|
+	School.find_by_name("#{school_name}").destroy
+end
+
+# DELETING SCHOOLS
+Given (/^I delete the school "(.*?)"$/) do |school_name|
+	if school = School.find_by_name("#{school_name}")
+		visit delete_school_path(school)
+		click_link("confirm_deletion")
+	else
+		visit delete_school_path(0)
+	end
+end
+
 
 
 #WHEN

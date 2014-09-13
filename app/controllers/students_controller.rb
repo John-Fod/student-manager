@@ -1,9 +1,9 @@
 class StudentsController < ApplicationController
   
   before_action :require_logged_in_teacher, only: [:new, :create, :edit, :update, :delete, :destroy]
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
-  before_action :set_school
-  before_action :require_valid_school_editor, only: [:new, :create, :edit, :update]
+  before_action :set_student, only: [:show, :edit, :update, :delete, :destroy]
+  before_action :set_school, except: [:index]
+  before_action :require_valid_school_editor, only: [:new, :create, :edit, :update, :delete, :destroy]
 
   # GET /students
   # GET /students.json
@@ -61,12 +61,16 @@ class StudentsController < ApplicationController
     end
   end
 
+  def delete
+
+  end
+
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
     @student.destroy
     respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
+      format.html { redirect_to @student.school, notice: 'Student was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

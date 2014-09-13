@@ -9,11 +9,11 @@ Background:
     | Akahige       | akahige@gmail.com    |
 
   Given the following schools:
-  	| name				| headmaster	|
+  	| name				| headmaster	      |
   	| Akahige's School 	| Akahige 		|
 
   Given the following students:
-  	| name 				| school 				|
+  	| name 				| school 				      |
   	| Joe 				| Akahige's School 		|
 
 
@@ -43,7 +43,7 @@ Background:
 
   Scenario: A logged in user attempts to edit a student to give him the same name as another student
   	Given the following students:
-  		| name 				| school 				|
+  		| name 				| school 				      |
   		| Bill 				| Akahige's School 		|
   	And I am logged in as "akahige@gmail.com"
     When I am on the edit student page for "Joe"
@@ -51,3 +51,18 @@ Background:
     And I fill in "student_level" with "Amazing"
   	And I press "commit"
     Then I should see an error message of "Name has already been taken"
+
+  Scenario: A logged in user can give a student the same name as a student in another school
+    Given the following schools:
+      | name              | headmaster        |
+      | Second School     | Akahige           |
+    Given the following students:
+      | name              | school            |
+      | Joey              | Second School     |
+    And I am logged in as "akahige@gmail.com"
+    When I am on the edit student page for "Joey"
+    And I fill in "student_name" with "Joe"
+    And I fill in "student_level" with "Not as good as the other Joe, who is in another school."
+    And I press "commit"
+    Then I should see a flash "notice" of "Student update successful."
+    And I should see a page title of "Joe"

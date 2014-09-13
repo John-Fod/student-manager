@@ -1,0 +1,35 @@
+<h1>Listing class_sessions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Room</th>
+      <th>Teacher</th>
+      <th>School</th>
+      <th>Name</th>
+      <th>Summary</th>
+      <th>Held at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @class_sessions.each do |class_session| %>
+      <tr>
+        <td><%= class_session.room_id %></td>
+        <td><%= class_session.teacher_id %></td>
+        <td><%= class_session.school_id %></td>
+        <td><%= class_session.name %></td>
+        <td><%= class_session.summary %></td>
+        <td><%= class_session.held_at %></td>
+        <td><%= link_to 'Show', class_session %></td>
+        <td><%= link_to 'Edit', edit_class_session_path(class_session) %></td>
+        <td><%= link_to 'Destroy', class_session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Class session', new_class_session_path %>

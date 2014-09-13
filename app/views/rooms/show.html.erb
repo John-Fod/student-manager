@@ -11,6 +11,7 @@
 		<section class="standard actions">
 			<h3 class="section-header">Actions</h3>
 			<ul class="actions-list">
+				<li><%= link_to "New Session", new_school_room_class_session_path(@school, @room) %></li>
 				<li><%= link_to "Edit Room", edit_school_room_path(@school, @room) %></li>
 				<li><%= link_to "Delete Room", delete_school_room_path(@school, @room) %></li>
 			</ul>

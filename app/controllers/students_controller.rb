@@ -1,9 +1,9 @@
 class StudentsController < ApplicationController
   
   before_action :require_logged_in_teacher, only: [:new, :create, :edit, :update, :delete, :destroy]
-  before_action :set_student, only: [:show, :edit, :update, :delete, :destroy]
-  before_action :set_school, except: [:index]
+  before_action :set_school
   before_action :require_valid_school_editor, only: [:new, :create, :edit, :update, :delete, :destroy]
+  before_action :set_student, only: [:show, :edit, :update, :delete, :destroy]
 
   # GET /students
   # GET /students.json
@@ -38,7 +38,7 @@ class StudentsController < ApplicationController
         #-CONNECT THE SCHOOL AND THE STUDENT IF @school IS PRESENT
         @student.schools << @school if @school
 
-        format.html { redirect_to @student, notice: 'Student creation successful.' }
+        format.html { redirect_to school_student_path(@student.school,@student), notice: 'Student creation successful.' }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: 'Student update successful.' }
+        format.html { redirect_to school_student_path(@student.school,@student), notice: 'Student update successful.' }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit }
@@ -78,10 +78,8 @@ class StudentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
-      if @student = Student.find_by_id(params[:id])
-        @student
-      else
-        redirect_to students_path, :alert => "That student does not exist."
+      unless @student = @school.students.find_by_id(params[:id])
+        redirect_to @school, :alert => "That student does not exist."
       end
     end
 
@@ -99,7 +97,7 @@ class StudentsController < ApplicationController
     def require_valid_school_editor
       if @school
         unless @school.editable_by? current_teacher
-          redirect_to schools_path, :alert => "You do not have permission to edit that school."
+          redirect_to @school, :alert => "You do not have permission to edit that school."
         end
       end
     end
@@ -109,11 +107,7 @@ class StudentsController < ApplicationController
     # WORKERS
 
     def get_school
-      if @student&&@student.school
-        return @student.school
-      elsif ((params[:school_id])&&(school=School.find_by_id(params[:school_id])))
-        return school
-      elsif ((params[:student][:school_id])&&(school=School.find_by_id(params[:student][:school_id])))
+      if ((params[:school_id])&&(school=School.find_by_id(params[:school_id])))
         return school
       else
         return false

@@ -11,8 +11,8 @@
 		<section class="standard actions">
 			<h3 class="section-header">Actions</h3>
 			<ul class="actions-list">
-				<li><%= link_to "Edit Student", edit_student_path(@student) %></li>
-				<li><%= link_to "Delete Student", delete_student_path(@student) %></li>
+				<li><%= link_to "Edit Student", edit_school_student_path(@student.school,@student) %></li>
+				<li><%= link_to "Delete Student", delete_school_student_path(@student.school,@student) %></li>
 			</ul>
 		</section>
 	<% end %>
@@ -33,10 +33,10 @@
 		<p>Student deletion is <strong>permanent</strong>.  This student will be removed from their school and rooms.</p>
 			<ul>
 				<li>
-					<%= link_to "Delete", @student, method: :delete %>
+					<%= link_to "Delete", school_student_path(@student.school,@student), method: :delete %>
 				</li>
 				<li>
-					<%= link_to "Back", student_path(@student) %>
+					<%= link_to "Back", school_student_path(@student.school,@student) %>
 				</li>
 			</ul>
 	</section>

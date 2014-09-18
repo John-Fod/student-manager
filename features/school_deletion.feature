@@ -41,8 +41,9 @@ Background:
       | Mike        | Akahige's School    |
     And I am logged in as "akahige@gmail.com"
     And the school "Akahige's School" is deleted
-    When I am on the page for the student "Joe"
-    Then I should see a flash "alert" of "That student does not exist."
+    When I am on the page for the student "Joe" in the school "Akahige's School"
+    Then I should see a page title of "Schools"
+    And I should see a flash "alert" of "That school does not exist."
 
   Scenario: A headmaster deletes a school and the rooms of the school are deleted
     Given the following rooms:

@@ -1,5 +1,5 @@
 <article class="parcel school">
 	<header>
-		<h4><%= link_to "#{entry.name}", entry %></h4>
+		<h4><%= link_to "#{entry.name}", school_student_path(entry.school,entry) %></h4>
 	</header>
 </article>

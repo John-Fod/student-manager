@@ -33,7 +33,7 @@
 		<p>Student deletion is <strong>permanent</strong>.  This student will be removed from their school and rooms.</p>
 			<ul>
 				<li>
-					<%= link_to "Delete", school_student_path(@student.school,@student), method: :delete %>
+					<%= link_to "Delete", school_student_path(@student.school,@student), method: :delete, :id => "confirm_deletion" %>
 				</li>
 				<li>
 					<%= link_to "Back", school_student_path(@student.school,@student) %>

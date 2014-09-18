@@ -52,3 +52,17 @@ Background:
     And I am logged in as "john@gmail.com"
     When I am on the new student page for the school "Akahige's School"
     Then I should see a flash "alert" of "You do not have permission to edit that school."
+
+#----- DIRECT INPUT VALIDATIONS
+#------------------------------
+
+  Scenario: A teacher attempts to add a student to a school that doesn't exist
+    Given I am logged in as "akahige@gmail.com"
+    When I am on the new student page for the school "xxxxx"
+    Then I should see a page title of "Schools"
+    Then I should see a flash "alert" of "That school does not exist."
+
+  Scenario: A non logged in user attempts to add a student to a school that doesn't exist
+    When I am on the new student page for the school "xxxxx"
+    Then I should see a page title of "Log In"
+    Then I should see a flash "alert" of "You must be logged in to do that."

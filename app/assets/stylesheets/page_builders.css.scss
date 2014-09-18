@@ -9,6 +9,7 @@
 -HEADERS
 -BANNERS
 -ACTIONS
+-DELETION PROMPT
 
 
 
@@ -151,6 +152,55 @@ section.actions{
 					border:							1px solid $support-light;
 					color:							darken($support-verydark,10%);
 					border-left:				none;
+				}
+			}
+		}
+	}
+}
+
+/****DELETION PROMPT
+*******************/
+section.deletion-prompt{
+	padding:										5px 10px;
+
+	h1{
+		font-size:								20px;
+		font-family:							$sans;
+		line-height:							25px;
+		text-align:								center;
+		margin:										5px auto;
+	}
+
+	p{
+		font-size:								14px;
+		font-family:							$serifs;
+		font-style:								italic;
+	}
+
+	ul{
+		text-align:								center;
+
+		li{
+			display:								inline-block;
+			margin:									10px 5px;
+
+			a{
+				display:							block;
+				border:								1px solid darken($grey-verydark,20%);
+				background-color:			$grey-verylight;
+				color:								darken($grey-verydark,20%);
+				padding:							2px 5px;
+				text-decoration:			none;
+
+				&#confirm_deletion{
+					border-color:				$red-dark;
+					background-color:		$red-verylight;
+					color:							$red-dark;
+					opacity:						.6;
+
+					&:hover{
+						opacity:					1;
+					}
 				}
 			}
 		}

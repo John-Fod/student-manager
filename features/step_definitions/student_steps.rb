@@ -14,8 +14,11 @@ end
 
 # VISIT A CREATE PAGE
 When(/^I am on the new student page for the school "(.*?)"$/) do |school_name|
-  school = School.find_by_name("#{school_name}")
-  visit new_school_student_path(school)
+  if school = School.find_by_name("#{school_name}")
+  	visit new_school_student_path(school)
+  else
+  	visit new_school_student_path(0)
+  end
 end
 
 # VISIT AN EDIT PAGE

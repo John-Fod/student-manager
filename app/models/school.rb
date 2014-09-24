@@ -7,7 +7,10 @@ class School < ActiveRecord::Base
 
 	has_many :students, :dependent => :destroy
 	has_many :rooms, :dependent => :destroy
+	has_many :class_sessions
+	has_many :periods
 
+	has_and_belongs_to_many :teachers
 	has_and_belongs_to_many :courses
 
 

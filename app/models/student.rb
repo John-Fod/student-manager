@@ -7,6 +7,9 @@ class Student < ActiveRecord::Base
 
 	has_and_belongs_to_many :schools
 	has_and_belongs_to_many :rooms
+	has_and_belongs_to_many :classroom_sessions, :class_name => "ClassSession"
+
+	before_destroy { classroom_sessions.clear }
 
 
 	#-----METHODS

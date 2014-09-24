@@ -4,9 +4,12 @@ class Room < ActiveRecord::Base
 
 	belongs_to :school
 	belongs_to :founding_teacher, class_name: "Teacher", foreign_key: "founding_teacher_id"
+	belongs_to :regular_teacher, class_name: "Teacher", foreign_key: "regular_teacher_id"
 
 	has_and_belongs_to_many :teachers
 	has_and_belongs_to_many :students
+
+	has_many :class_sessions
 
 
 	#-----METHODS

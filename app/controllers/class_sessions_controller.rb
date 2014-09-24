@@ -1,6 +1,7 @@
 class ClassSessionsController < ApplicationController
   before_action :set_class_session, only: [:show, :edit, :update, :destroy]
-  before_action :set_school, only: [:show, :new, :create, :edit, :update, :delete, :destroy]
+  before_action :set_school, except: [:index]
+  before_action :set_room, except: [:index]
 
   # GET /class_sessions
   # GET /class_sessions.json
@@ -16,6 +17,15 @@ class ClassSessionsController < ApplicationController
   # GET /class_sessions/new
   def new
     @class_session = ClassSession.new
+    @class_session.school = @school
+    @class_session.room = @room if @room
+
+    if @room
+      @potential_students = @room.students + (@school.students.order(:name => :asc) - @room.students)
+    else
+      @potential_students = @class_session.school.students
+    end
+
   end
 
   # GET /class_sessions/1/edit
@@ -74,11 +84,18 @@ class ClassSessionsController < ApplicationController
     end
 
     def set_school
-      unless @school = get_school
+      unless @school = School.find_by_id(params[:school_id])
         redirect_to schools_path, :alert => "That school does not exist."
       end
     end
 
+    def set_room
+      if params[:room_id]
+        unless @room = @school.rooms.find_by_id(params[:room_id])
+          redirect_to school_path(@school), :alert => "That room does not exist."
+        end
+      end
+    end
 
     #WORKERS
 

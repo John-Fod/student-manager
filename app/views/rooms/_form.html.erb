@@ -21,6 +21,38 @@
         <%= f.label :summary %>
         <%= f.text_area :summary %>
       </li>
+      <%-#-- SELECT THE REGULAR TEACHER --%>
+      <li class="field teacher select">
+        <%= f.label :regular_teacher, "Teacher" %>
+        <%= f.select :regular_teacher, options_for_select(
+          @school.teachers.map{
+            |t| [t.name, t.id]
+          }
+        )
+        %>
+      </li>
+      <%-#--SELECT THE REGULAR DATE AND TIME--%>
+      <li class="field day select">
+        <%= f.label :regular_day, "Day" %>
+        <%= f.select :regular_day, [
+          ["Sunday", 0],
+          ["Saturday", 1],
+          ["Monday", 2],
+          ["Tuesday", 3],
+          ["Wednesday", 4],
+          ["Thursday", 5],
+          ["Friday", 6],
+          ["Saturday", 7]
+        ] %>
+      </li>
+      <li class="field period select">
+        <%= f.label :regular_period, "Period" %>
+        <%= f.select :regular_period, [
+          ["First", 1],
+          ["Second", 2],
+          ["Third", 3]
+        ] %>
+      </li>
       <%-#--SELECT STUDENTS FOR THE ROOM--%>
       <% if @school.students.size > 0 %>
       <%= hidden_field_tag("room[student_ids][]", nil) %>

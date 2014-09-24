@@ -1,0 +1,39 @@
+<%= form_for([@school, @period]) do |f| %>
+
+  <% if @period.errors.any? %>
+    <div class="error-messages">
+      <h2><%= pluralize(@period.errors.count, "error") %> prohibited this period from being saved:</h2>
+      <ul>
+      <% @period.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-fields">
+    <ul>
+      <%= f.hidden_field :school_id if @period.new_record? %>
+
+      <li>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </li>
+
+      <li class="field time-select">
+        <%= f.label :start_at, "Starting Time" %>
+        <%= f.time_select :start_at, {:minute_step => 5, :ampm => true} %>
+      </li>
+
+      <li class="field time-select">
+        <%= f.label :end_at, "Ending Time" %>
+        <%= f.time_select :end_at, {:minute_step => 5, :ampm => true} %>
+      </li>
+
+      <li class="actions">
+        <%= f.submit :id => "commit" %>
+      </li>
+
+    </ul>
+  </div>
+<% end %>

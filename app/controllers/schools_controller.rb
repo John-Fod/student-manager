@@ -31,9 +31,12 @@ class SchoolsController < ApplicationController
   # POST /schools.json
   def create
     @school = School.new(school_params)
+    #-ADD THE HEADMASTER TO THE LIST OF THE SCHOOL'S TEACHERS
+    @school.teachers<<@school.headmaster
 
     respond_to do |format|
       if @school.save
+
         format.html { redirect_to @school, notice: 'School founding successful.' }
         format.json { render :show, status: :created, location: @school }
       else

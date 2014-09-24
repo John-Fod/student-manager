@@ -1,6 +1,6 @@
 <%= form_for([@school, @class_session]) do |f| %>
   <% if @class_session.errors.any? %>
-    <div id="error_explanation">
+    <div class="error-messages">
       <h2><%= pluralize(@class_session.errors.count, "error") %> prohibited this class_session from being saved:</h2>
 
       <ul>
@@ -11,31 +11,49 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :room_id %><br>
-    <%= f.number_field :room_id %>
+  <div class="form-fields">
+    <%= f.hidden_field :room_id %>
+    <%= f.hidden_field :school_id %>
+    <ul>
+      <li class="field">
+        <%= f.label :teacher_id %>
+        <%= f.number_field :teacher_id %>
+        <%= f.select :teacher_id, @school.teachers.all.map{ |t| [t.name, "#{t.id}"] } %>
+      </li>
+      <li class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </li>
+      <li class="field">
+        <%= f.label :summary %>
+        <%= f.text_area :summary %>
+      </li>
+
+      <%-#--SELECT STUDENTS FOR THE CLASS SESSION--%>
+      <% if @school.students.size > 0 %>
+      <%= hidden_field_tag("class_session[student_ids][]", nil) %>
+        <li class="field student checkboxes">
+          <h6 class="fake-label">Students</h6>
+          <ul>
+            <% @potential_students.each do |student| %>
+              <li>
+                <label <%= @room && student.in?(@room.students) ? "class='in-room'" : "" %>>
+                  <%= check_box_tag("class_session[student_ids][]", student.id, (@room && student.in?(@room.students))) %> <%= student.name %>
+                </label>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+
+      <li class="field">
+        <%= f.label :held_at %>
+        <%= f.datetime_select :held_at %>
+      </li>
+      <li class="actions">
+        <%= f.submit %>
+      </li>
+    </ul>
   </div>
-  <div class="field">
-    <%= f.label :teacher_id %><br>
-    <%= f.number_field :teacher_id %>
-  </div>
-  <div class="field">
-    <%= f.label :school_id %><br>
-    <%= f.number_field :school_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :summary %><br>
-    <%= f.text_area :summary %>
-  </div>
-  <div class="field">
-    <%= f.label :held_at %><br>
-    <%= f.datetime_select :held_at %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
 <% end %>

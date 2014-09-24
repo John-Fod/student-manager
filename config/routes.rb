@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-
   resources :courses
 
   resources :schools do
     resources :students
     resources :rooms
     resources :class_sessions
+    resources :periods
   end
 
   root :to => 'home#index'
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/schools/:school_id/rooms/:id/delete', to: 'rooms#delete', as: 'delete_school_room'
   get '/schools/:school_id/students/:id/delete', to: 'students#delete', as: 'delete_school_student'
   get '/schools/:school_id/class_sessions/:id/delete', to: 'class_sessions#delete', as: 'delete_school_class_session'
+  get '/schools/:school_id/periods/:id/delete', to: 'periods#delete', as: 'delete_school_period'
 
 
   #-----TEACHER AND SESSION NAVIGATION

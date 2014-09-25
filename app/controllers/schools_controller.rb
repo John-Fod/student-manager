@@ -15,6 +15,7 @@ class SchoolsController < ApplicationController
   def show
     @school_students = @school.students.order(:name => :asc)
     @school_rooms = @school.rooms
+    @school_periods = @school.periods.order(:start_at => :asc)
   end
 
   # GET /schools/new

@@ -44,6 +44,27 @@
 </div>
 
 <div class="eleven columns omega">
-a
+
+	<table class="period-schedule">
+
+		<tr class="header-row">
+			<td>Period</td>
+			<% @school.teachers.each do |teacher| %>
+				<td><%= link_to "#{teacher.name}", teacher %></td>
+			<% end %>
+		</tr>
+
+		<% @school_periods.each do |period| %>
+			<tr class="period-row">
+				<td><%= link_to "#{period.name}", school_period_path(@school,period) %></td>
+				<% @school.teachers.each do |teacher| %>
+					<td>
+
+					</td>
+				<% end %>
+			</tr>
+		<% end %>
+
+	</table>
 
 </div>

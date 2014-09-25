@@ -17,6 +17,7 @@ class PeriodsController < ApplicationController
   # GET /periods/new
   def new
     @period = Period.new
+    @period.school = @school
   end
 
   # GET /periods/1/edit
@@ -30,8 +31,8 @@ class PeriodsController < ApplicationController
 
     respond_to do |format|
       if @period.save
-        format.html { redirect_to @period, notice: 'Period was successfully created.' }
-        format.json { render :show, status: :created, location: @period }
+        format.html { redirect_to @period.school, notice: 'Period was successfully created.' }
+        format.json { render :show, status: :created, location: @period.school }
       else
         format.html { render :new }
         format.json { render json: @period.errors, status: :unprocessable_entity }
@@ -44,8 +45,8 @@ class PeriodsController < ApplicationController
   def update
     respond_to do |format|
       if @period.update(period_params)
-        format.html { redirect_to @period, notice: 'Period was successfully updated.' }
-        format.json { render :show, status: :ok, location: @period }
+        format.html { redirect_to @period.school, notice: 'Period was successfully updated.' }
+        format.json { render :show, status: :ok, location: @period.school }
       else
         format.html { render :edit }
         format.json { render json: @period.errors, status: :unprocessable_entity }
@@ -71,7 +72,7 @@ class PeriodsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def period_params
-      params[:period]
+      params.require(:period).permit(:name, :start_at, :end_at, :school_id)
     end
 
 

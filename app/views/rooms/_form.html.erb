@@ -22,15 +22,24 @@
         <%= f.text_area :summary %>
       </li>
       <%-#-- SELECT THE REGULAR TEACHER --%>
-      <li class="field teacher select">
-        <%= f.label :regular_teacher, "Teacher" %>
-        <%= f.select :regular_teacher, options_for_select(
-          @school.teachers.map{
-            |t| [t.name, t.id]
-          }
-        )
-        %>
-      </li>
+      <% if @school_teachers.size > 1 %>
+        <li class="field period select">
+          <%= f.label :regular_teacher, "Teacher" %>
+          <%= f.select :regular_teacher, [
+            @school_teachers.map{
+              |p| [p.name, p.id]
+            }
+        ] %>
+        </li>
+      <% else %>
+        <li class="field period select">
+          <%= f.label :regular_teacher, "Teacher" %>
+          <%= f.select :regular_teacher, [
+            ["#{@school.teachers.first.name}", @school.teachers.first.id]
+          ]
+          %>
+        </li>
+      <% end %>
       <%-#--SELECT THE REGULAR DATE AND TIME--%>
       <li class="field day select">
         <%= f.label :regular_day, "Day" %>
@@ -47,11 +56,21 @@
       </li>
       <li class="field period select">
         <%= f.label :regular_period, "Period" %>
-        <%= f.select :regular_period, [
-          ["First", 1],
-          ["Second", 2],
-          ["Third", 3]
-        ] %>
+        <% if @school.periods.size > 1 %>
+          <%= f.select :regular_period, [
+            @school_periods.map{
+              |p| [p.name, p.id]
+            }
+          ] 
+          %>
+        <% else %>
+          <li class="field period select">
+            <%= f.select :regular_period, [
+              ["#{@school_periods.first.name}", @school_periods.first.id]
+            ]
+            %>
+          </li>
+        <% end %>
       </li>
       <%-#--SELECT STUDENTS FOR THE ROOM--%>
       <% if @school.students.size > 0 %>

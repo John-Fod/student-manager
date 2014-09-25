@@ -22,10 +22,14 @@ class RoomsController < ApplicationController
     @room = Room.new
     @room.school = @school
     @room.founding_teacher = current_teacher
+    @school_periods = @school.periods.order(:start_at => :asc)
+    @school_teachers = @school.teachers.order(:name => :asc)
   end
 
   # GET /rooms/1/edit
   def edit
+    @school_periods = @school.periods.order(:start_at => :asc)
+    @school_teachers = @school.teachers.order(:name => :asc)
   end
 
   # POST /rooms

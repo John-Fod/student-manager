@@ -63,18 +63,21 @@ Background:
 
   Scenario: A logged in teacher attempts to edit a room in a school that doens't exist
     Given I am logged in as "akahige@gmail.com"
-    When I am on the edit room page for the school "Not Akahige's School" and the room "Room 1"
-    Then I should see a banner for the school "Akahige's School"
+    When I am on the edit room page for the school "Non-School" and the room "Room 1"
+    Then I should see a flash "alert" of "That school does not exist."
+    And I should see a page title of "Akahige"
 
   Scenario: A logged in teacher attempts to edit a room that doesn't exist in a school that does
     Given I am logged in as "akahige@gmail.com"
-    When I am on the edit room page for the school "Akahige's School" and the room "Not Room 1"
-    Then I should see a flash "alert" of "That room does not exist."
+    When I am on the edit room page for the school "Akahige's School" and the room "Non-Room"
+    Then I should see a page title of "Akahige's School"
+    And I should see a flash "alert" of "That room does not exist."
 
   Scenario: A logged in teacher attempts to edit a room in a school the room doesn't belong to
   	Given the following schools:
-  	| name				| headmaster	|
+  	| name				    | headmaster	|
   	| Second School 	| Akahige 		|
   	And I am logged in as "akahige@gmail.com"
     When I am on the edit room page for the school "Second School" and the room "Room 1"
-    Then I should see a banner for the school "Akahige's School"
+    Then I should see a page title of "Second School"
+    And I should see a flash "alert" of "That room does not exist."

@@ -6,7 +6,7 @@
 Given (/^the following schools:$/) do |table|
 	table.hashes.each do |attributes|
 		attributes[:headmaster] = Teacher.find_by_name("#{attributes[:headmaster]}")
-		FactoryGirl.create(:school, attributes)
+		school = FactoryGirl.create(:school, attributes)
 	end
 end
 

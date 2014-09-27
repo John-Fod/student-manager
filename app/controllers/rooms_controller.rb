@@ -1,9 +1,9 @@
 class RoomsController < ApplicationController
 
-  before_action :set_room, only: [:show, :edit, :update, :delete, :destroy]
-  before_action :set_school
   before_action :require_logged_in_teacher, only: [:new, :create, :edit, :update, :delete, :destroy]
+  before_action :set_school
   before_action :require_valid_school_editor, only: [:new, :create, :edit, :update, :delete, :destroy]
+  before_action :set_room, only: [:show, :edit, :update, :delete, :destroy]
 
   # GET /rooms
   # GET /rooms.json
@@ -22,14 +22,10 @@ class RoomsController < ApplicationController
     @room = Room.new
     @room.school = @school
     @room.founding_teacher = current_teacher
-    @school_periods = @school.periods.order(:start_at => :asc)
-    @school_teachers = @school.teachers.order(:name => :asc)
   end
 
   # GET /rooms/1/edit
   def edit
-    @school_periods = @school.periods.order(:start_at => :asc)
-    @school_teachers = @school.teachers.order(:name => :asc)
   end
 
   # POST /rooms
@@ -79,14 +75,18 @@ class RoomsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room
-      unless @room = Room.find_by_id(params[:id])
-        redirect_to home_path, :alert => "That room does not exist."
+      unless @room = @school.rooms.find_by_id(params[:id])
+        redirect_to school_path(@school), :alert => "That room does not exist."
       end
     end
 
     def set_school
-      unless @school = get_school
-        redirect_to schools_path, :alert => "That school does not exist."
+      unless @school = School.find_by_id(params[:school_id])
+        if current_teacher
+          redirect_to dashboard_path, :alert => "That school does not exist."
+        else
+          redirect_to home_path, :alert => "That school does not exis"
+        end
       end
     end
 
@@ -113,8 +113,8 @@ class RoomsController < ApplicationController
     # WORKERS
 
     def get_school
-      if @room&&@room.school
-        return @room.school
+      if @school
+        return @school
       elsif ((params[:school_id])&&(school=School.find_by_id(params[:school_id])))
         return school
       else

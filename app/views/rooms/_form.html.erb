@@ -22,24 +22,22 @@
         <%= f.text_area :summary %>
       </li>
       <%-#-- SELECT THE REGULAR TEACHER --%>
-      <% if @school_teachers.size > 1 %>
-        <li class="field period select">
-          <%= f.label :regular_teacher, "Teacher" %>
+      <li class="field regular_teacher select">
+        <%= f.label :regular_teacher, "Teacher" %>
+        <% if @school.all_teachers.size > 1 %>
+        <%= f.select :regular_teacher, [
+          @school.all_teachers.map{
+            |t| [t.name, t.id]
+          }
+        ]
+        %>
+        <% else %>
           <%= f.select :regular_teacher, [
-            @school_teachers.map{
-              |p| [p.name, p.id]
-            }
-        ] %>
-        </li>
-      <% else %>
-        <li class="field period select">
-          <%= f.label :regular_teacher, "Teacher" %>
-          <%= f.select :regular_teacher, [
-            ["#{@school.teachers.first.name}", @school.teachers.first.id]
+            ["#{@school.all_teachers.first.name}", @school.all_teachers.first.id]
           ]
           %>
-        </li>
-      <% end %>
+        <% end %>
+      </li>
       <%-#--SELECT THE REGULAR DATE AND TIME--%>
       <li class="field day select">
         <%= f.label :regular_day, "Day" %>
@@ -54,24 +52,26 @@
           ["Saturday", 7]
         ] %>
       </li>
-      <li class="field period select">
-        <%= f.label :regular_period, "Period" %>
-        <% if @school.periods.size > 1 %>
-          <%= f.select :regular_period, [
-            @school_periods.map{
-              |p| [p.name, p.id]
-            }
-          ] 
-          %>
-        <% else %>
-          <li class="field period select">
+      <% if @school.periods.size > 0 %>
+        <li class="field period select">
+          <%= f.label :regular_period, "Period" %>
+          <% if @school.periods.size > 1 %>
             <%= f.select :regular_period, [
-              ["#{@school_periods.first.name}", @school_periods.first.id]
-            ]
+              @school.periods.order(:start_at => :asc).map{
+                |p| [p.name, p.id]
+              }
+            ] 
             %>
-          </li>
-        <% end %>
-      </li>
+          <% else %>
+            <li class="field period select">
+              <%= f.select :regular_period, [
+                ["#{@school.periods.first.name}", @school.periods.first.id]
+              ]
+              %>
+            </li>
+          <% end %>
+        </li>
+      <% end %>
       <%-#--SELECT STUDENTS FOR THE ROOM--%>
       <% if @school.students.size > 0 %>
       <%= hidden_field_tag("room[student_ids][]", nil) %>

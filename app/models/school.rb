@@ -22,5 +22,11 @@ class School < ActiveRecord::Base
 		return true if((editor)&&(self.headmaster==editor))
 	end
 
+	def all_teachers
+		teachers = Array.new
+		teachers << self.headmaster
+		return teachers
+	end
+
 
 end

@@ -51,5 +51,6 @@ Background:
       | Room 1      | Akahige's School  | Akahige           |
     And I am logged in as "akahige@gmail.com"
     And the school "Akahige's School" is deleted
-    When I am on the page for the room "Room 1"
-    Then I should see a flash "alert" of "That room does not exist."
+    When I am on the show room page for the room "Room 1" in the school "Akahige's School"
+    Then I should see a flash "alert" of "That school does not exist."
+    And I should see a page title of "Akahige"

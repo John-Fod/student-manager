@@ -5,12 +5,12 @@ Feature: Room Creation
 
 Background:
   Given the following teachers:
-    | name        | email                |
-    | Akahige      | akahige@gmail.com    |
+    | name          | email                |
+    | Akahige       | akahige@gmail.com    |
 
   Given the following schools:
-  	| name				| headmaster	|
-  	| Akahige's School 	| Akahige 		|
+  	| name				       | headmaster	|
+  	| Akahige's School 	 | Akahige 		|
 
 
 #----- SUCCESSFULLY FOUNDING A NEW ROOM

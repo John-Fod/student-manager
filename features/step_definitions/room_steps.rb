@@ -65,6 +65,23 @@ When(/^I am on the page for the room "(.*?)"$/) do |room_name|
 	end
 end
 
+# VISIT A ROOM'S PAGE
+When(/^I am on the show room page for the room "(.*?)" in the school "(.*?)"$/) do |room_name, school_name|
+	if school = School.find_by_name("#{school_name}")
+		if room = school.rooms.find_by_name("#{room_name}")
+			visit school_room_path(school,room)
+		else
+			visit school_room_path(school,0)
+		end
+	else
+		if room = Room.find_by_name("#{room_name}")
+			visit school_room_path(0,room)
+		else
+			visit school_room_path(0,0)
+		end
+	end
+end
+
 
 
 

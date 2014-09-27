@@ -32,7 +32,7 @@ class TeachersController < ApplicationController
   end
 
   def dashboard
-    @teacher_schools = current_teacher.schools
+    @teacher_schools = current_teacher.founded_schools
   end
 
 

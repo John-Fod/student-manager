@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :class_session do
-    room_id 1
-    teacher_id 1
-    school_id 1
-    name "MyString"
-    summary "MyText"
-    held_at "2014-09-13 18:29:08"
+    room Room.last
+    teacher Teacher.last
+    school School.last
+    period Period.last
+    held_at Time.now.beginning_of_day
+    day Date.today.beginning_of_day
   end
 end

@@ -6,6 +6,17 @@
 	<%-#--ROOMS'S HEADER--%>
 	<%= render 'header', :entry => @room %>
 
+	<%-#--ROOM'S BASIC INFO--%>
+	<section class="standard quick-info-holder">
+		<h3 class="section-header">Room Info</h3>
+		<dl>
+			<dt>Day</dt>
+				<dd><%= @room.regular_day ? Date::DAYNAMES[@room.regular_day] : "Unspecified" %></dd>
+			<dt>Period</dt>
+				<dd><%= @room.regular_period ? @room.regular_period.name : "Unspecified" %></dd>
+		</dl>
+	</section>
+
 	<%-#--HEADMASTER'S ACTIONS--%>
 	<% if @school.editable_by? current_teacher %>
 		<section class="standard actions">

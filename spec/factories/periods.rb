@@ -2,5 +2,9 @@
 
 FactoryGirl.define do
   factory :period do
+    name "MyString"
+    school School.last
+    start_at Time.now
+    end_at Time.now
   end
 end

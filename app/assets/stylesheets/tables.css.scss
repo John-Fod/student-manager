@@ -1,0 +1,95 @@
+@import 'colors';
+@import 'text';
+/**********************
+*****TABLES************
+**********************/
+
+/*************************
+-TABLES
+-PERIOD SCHEDULE
+
+
+
+
+*************************/
+
+
+/****TABLES
+***********/
+
+
+/****PERIOD SCHEDULE
+*******************/
+.period-schedule{
+	background-color:									white;
+	border:														1px solid $base-dark;
+
+	tr{
+
+		td{
+			border:												1px solid $base-dark;
+			padding:											5px;
+
+			&.class-session{
+				height:											100px;
+				width:											260px;
+
+				header{
+					h5{
+						font-weight:						bold;
+						font-family:						$sans;
+						font-size:							14px;
+
+						a{
+							text-decoration:			none;
+
+							&:hover{
+								text-decoration:		underline;
+							}
+						}
+					}
+					.free-delete,.free-edit{
+						font-size:							10px;
+						vertical-align:					top;
+					}
+				}
+			}
+
+			.add-class{
+				font-size:									10px;
+				padding:										1px 3px;
+				color:											$support-verydark;
+			}
+
+			.schedule-form{
+				background-color:						$base-verylight;
+				border:											1px solid $base;
+				padding:										2px 0px;
+				margin:											auto;
+				width:											100%;
+
+				input{
+					width:										100px;
+					background-color:					lighten($support-verylight,17%);
+				}
+			}
+		}
+
+		&.header-row{
+			background-color:							lighten($support-verylight,17%);
+			font-weight:									bold;
+			font-size:										16px;
+			text-align:										center;
+
+			a{
+				text-decoration:						none;
+				color:											444;
+				&:hover{
+					text-decoration:					underline;
+					color:										$support-dark;
+				}
+			}
+		}
+	}
+
+}

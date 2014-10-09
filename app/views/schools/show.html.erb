@@ -45,26 +45,73 @@
 
 <div class="eleven columns omega">
 
-	<table class="period-schedule">
-
-		<tr class="header-row">
-			<td>Period</td>
-			<% @school.teachers.each do |teacher| %>
-				<td><%= link_to "#{teacher.name}", teacher %></td>
-			<% end %>
-		</tr>
-
-		<% @school_periods.each do |period| %>
-			<tr class="period-row">
-				<td><%= link_to "#{period.name}", school_period_path(@school,period) %></td>
-				<% @school.teachers.each do |teacher| %>
-					<td>
-
-					</td>
+	<%-#--THE DAY'S SCHEDULED CLASS SESSIONS %>
+	<section class="schedule-holder">
+		<h2><%= @day.strftime('%A %B %d, %Y') %></h2>
+		<table class="period-schedule">
+			<tr class="header-row">
+				<td>Period</td>
+				<% @school.all_teachers.each do |teacher| %>
+					<td><%= link_to "#{teacher.name}", teacher %></td>
 				<% end %>
 			</tr>
-		<% end %>
 
-	</table>
+			<% @school_periods.each do |period| %>
+				<tr class="period-row">
+					<td><%= link_to "#{period.name}", school_period_path(@school,period) %></td>
+					<% @school.all_teachers.each do |teacher| %>
+						<td class="class-session">
+							<% if class_this_period = ClassSession.where(:school => @school, :day => @day, :teacher => teacher, :period => period).first %>
+								<header>
+									<h5><%= link_to "#{class_this_period.room.name}", school_room_path(@school,class_this_period.room) %></h5>
+									<%= link_to "Edit", edit_school_class_session_path(@school,class_this_period), :class => "free-edit", :id => "edit-period-room-#{class_this_period.room.to_param}-period-#{period.to_param}" %>
+									<%= link_to "Remove", school_class_session_path(@school,class_this_period), :method => :delete, :class => "free-delete", :id => "delete-period-room-#{class_this_period.room.to_param}-period-#{period.to_param}" %>
+								</header>
+								<div class="class-info">
+								</div>
+							<% else %>
+								<button class="add-class">Add Class</button>
+								<%-#--TO ADD A NEW CLASS SESSION %>
+								<div class="add-class-session">
+									<%= form_for([@school, @class_session]) do |f| %>
+	  								<div class="form-fields schedule-form">
+	  									<%= f.label :room_id, "Room" %>
+										<%= f.select :room_id, @school.rooms.all.map{ |r| [r.name, "#{r.id}"] }, {}, :id => "select-room-for-#{teacher.to_param}-#{period.to_param}" %>
+										<%= f.hidden_field :period_id, :value => period.to_param %>
+										<%= f.hidden_field :school_id %>
+										<%= f.hidden_field :teacher_id, :value => teacher.to_param %>
+										<%= f.hidden_field :held_at, :value => period.start_at %>
+										<%= f.hidden_field :day, :value => @day %>
+										<%= f.submit "Add Session", :id => "add-session-period-#{period.to_param}-teacher-#{teacher.to_param}" %>
+								 	</div>
+								<% end %>
+							</div>
+							<% end %>
+						</td>
+					<% end %>
+				</tr>
+			<% end %>
+
+		</table>
+	</section>
 
 </div>
+
+
+<script>
+
+	$(document).ready(function () {
+
+		dropdownAddClassSession();
+
+		function dropdownAddClassSession(){
+			$(".add-class-session").hide();
+			$(".add-class").click(function(){
+				$(this).next().slideToggle();
+			});
+		}
+
+	});
+	
+</script> 
+

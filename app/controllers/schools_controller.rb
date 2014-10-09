@@ -13,9 +13,18 @@ class SchoolsController < ApplicationController
   # GET /schools/1
   # GET /schools/1.json
   def show
+
     @school_students = @school.students.order(:name => :asc)
     @school_rooms = @school.rooms
     @school_periods = @school.periods.order(:start_at => :asc)
+    @day = Date.today.beginning_of_day
+    @day_of_week = Date.today.wday
+    @todays_class_sessions = @school.class_sessions.where(:day => @day)
+
+    #--ALLOW FOR A NEW CLASS SESSION
+    @class_session = ClassSession.new
+    @class_session.school = @school
+
   end
 
   # GET /schools/new

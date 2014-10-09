@@ -39,8 +39,8 @@ class ClassSessionsController < ApplicationController
 
     respond_to do |format|
       if @class_session.save
-        format.html { redirect_to @class_session, notice: 'Class session was successfully created.' }
-        format.json { render :show, status: :created, location: @class_session }
+        format.html { redirect_to @class_session.school, notice: 'Class session was successfully created.' }
+        format.json { render :show, status: :created, location: @class_session.school }
       else
         format.html { render :new }
         format.json { render json: @class_session.errors, status: :unprocessable_entity }
@@ -67,7 +67,7 @@ class ClassSessionsController < ApplicationController
   def destroy
     @class_session.destroy
     respond_to do |format|
-      format.html { redirect_to class_sessions_url, notice: 'Class session was successfully destroyed.' }
+      format.html { redirect_to school_path(@class_session.school), notice: 'Class session was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -80,7 +80,7 @@ class ClassSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def class_session_params
-      params.require(:class_session).permit(:room_id, :teacher_id, :school_id, :name, :summary, :held_at)
+      params.require(:class_session).permit(:room_id, :teacher_id, :school_id, :name, :summary, :held_at, :day, :period_id)
     end
 
     def set_school

@@ -10,6 +10,7 @@
 -BANNERS
 -ACTIONS
 -DELETION PROMPT
+-DAY BROWSER
 
 
 
@@ -202,6 +203,70 @@ section.deletion-prompt{
 						opacity:					1;
 					}
 				}
+			}
+		}
+	}
+}
+
+
+/****SCHEDULE HOLDER
+/******************/
+.schedule-holder{
+
+	h2{
+		margin-bottom:						0px;
+		padding:									3px 5px 7px 5px;
+		background-color:					lighten($base-verylight,5%);
+		border-top:								1px solid $support-dark;
+		border-left:							1px solid $support-dark;
+		border-right:							1px solid $support-dark;
+		font-size:								22px;
+		font-family:							$sans;
+		font-weight:							bold;
+		line-height:							1em;
+		text-align:								center;
+	}
+}
+
+/****DAY BROWSER
+/**************/
+.day-browser{
+	border:											1px solid $support-dark;
+	padding:										0px;
+	text-align:									center;
+	background-color:						$support;
+
+	li{
+		vertical-align:						top;
+		display:									inline-block;
+		margin:										0px;
+		padding:									0px 2px;
+		background-color:					lighten($support-verylight,10%);
+		border-left:							1px solid $support-dark;
+		border-right:							1px solid $support-dark;
+		font-size:								10px;
+		font-family:							$sans;
+		font-weight:							bold;
+		line-height:							1em;
+		height:										100%;
+
+		&:hover{
+			background-color:				lighten($support-verylight,15%);
+		}
+
+		&.today{
+			border-left:						1px solid $support-verydark;
+			border-right:						1px solid $support-verydark;
+			background-color:				lighten($base-verylight,5%);
+		}
+
+		a{
+			text-decoration:				none;
+			display:								block;
+			margin:									0px;
+			line-height:						20px;
+
+			&:hover{
 			}
 		}
 	}

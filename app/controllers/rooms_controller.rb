@@ -35,6 +35,27 @@ class RoomsController < ApplicationController
 
     respond_to do |format|
       if @room.save
+
+        #-MAKE CLASS SESSIONS FOR A YEAR
+        if @room.regular_day && @room.regular_period
+          start = Time.now.beginning_of_day
+          to = start + 1.year
+          scheduled_class_day = start
+          begin
+            if scheduled_class_day.wday == @room.regular_day
+              new_class_session = ClassSession.new
+              new_class_session.school = @room.school
+              new_class_session.room = @room
+              new_class_session.day = scheduled_class_day.to_date
+              new_class_session.period = @room.regular_period
+              new_class_session.held_at = @room.regular_period.start_at
+              new_class_session.teacher_id = @room.regular_teacher_id if @room.regular_teacher_id
+              new_class_session.save
+            end
+            scheduled_class_day += 1.day
+          end while scheduled_class_day <= to
+        end
+
         format.html { redirect_to school_room_path(@room.school,@room), notice: 'Room founding successful.' }
         format.json { render :show, status: :created, location: @room }
       else
@@ -67,6 +88,9 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy
     respond_to do |format|
+      @room.class_sessions.each do |class_session|
+        class_session.destroy
+      end
       format.html { redirect_to school_rooms_path(@room.school), notice: 'Room was successfully destroyed.' }
       format.json { head :no_content }
     end
@@ -104,7 +128,8 @@ class RoomsController < ApplicationController
         :school_id,
         :founding_teacher_id,
         :regular_day,
-        :regular_period,
+        :regular_teacher_id,
+        :regular_period_id,
         :student_ids => []
       )
     end

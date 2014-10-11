@@ -48,6 +48,13 @@
 	<%-#--THE DAY'S SCHEDULED CLASS SESSIONS %>
 	<section class="schedule-holder">
 		<h2><%= @day.strftime('%A %B %d, %Y') %></h2>
+		<ul class="day-browser">
+			<li class="today"><%= link_to "Today", school_path(@school, :day => Date.today) %></li>
+			<li><%= link_to "Back A Week", school_path(@school, :day => @day - 7) %></li>
+			<li><%= link_to "Back A Day", school_path(@school, :day => @day - 1) %></li>
+			<li><%= link_to "Up A Day", school_path(@school, :day => @day + 1) %></li>
+			<li><%= link_to "Up A Week", school_path(@school, :day => @day + 7) %></li>
+		</ul>
 		<table class="period-schedule">
 			<tr class="header-row">
 				<td>Period</td>

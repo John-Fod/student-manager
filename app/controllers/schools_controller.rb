@@ -17,8 +17,12 @@ class SchoolsController < ApplicationController
     @school_students = @school.students.order(:name => :asc)
     @school_rooms = @school.rooms
     @school_periods = @school.periods.order(:start_at => :asc)
-    @day = Date.today.beginning_of_day
-    @day_of_week = Date.today.wday
+    if params[:day]
+      @day = params[:day].to_date
+    else
+      @day = Date.today
+    end
+    @day_of_week = Time.now.to_date.wday
     @todays_class_sessions = @school.class_sessions.where(:day => @day)
 
     #--ALLOW FOR A NEW CLASS SESSION

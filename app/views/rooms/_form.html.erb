@@ -23,16 +23,16 @@
       </li>
       <%-#-- SELECT THE REGULAR TEACHER --%>
       <li class="field regular_teacher select">
-        <%= f.label :regular_teacher, "Teacher" %>
+        <%= f.label :regular_teacher_id, "Teacher" %>
         <% if @school.all_teachers.size > 1 %>
-        <%= f.select :regular_teacher, [
+        <%= f.select :regular_teacher_id, [
           @school.all_teachers.map{
             |t| [t.name, t.id]
           }
         ]
         %>
         <% else %>
-          <%= f.select :regular_teacher, [
+          <%= f.select :regular_teacher_id, [
             ["#{@school.all_teachers.first.name}", @school.all_teachers.first.id]
           ]
           %>
@@ -53,12 +53,12 @@
       </li>
       <% if @school.periods.size > 0 %>
         <li class="field period select">
-          <%= f.label :regular_period, "Period" %>
+          <%= f.label :regular_period_id, "Period" %>
           <% if @school.periods.size > 1 %>
-            <%= f.select :regular_period, @school.periods.all.map { |p| ["#{p.name}", p.id]} %>
+            <%= f.select :regular_period_id, @school.periods.all.map { |p| ["#{p.name}", p.id]} %>
           <% else %>
             <li class="field period select">
-              <%= f.select :regular_period, [
+              <%= f.select :regular_period_id, [
                 ["#{@school.periods.first.name}", @school.periods.first.id]
               ]
               %>

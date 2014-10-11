@@ -1,1 +1,44 @@
-delete.html.erb
+<div class="five columns alpha">
+
+	<%-#--THE SCHOOL BANNER --%>
+	<%= render 'schools/banner', :entry => @school %>
+
+	<%-#--THE ROOM'S HEADER--%>
+	<%= render 'header', :entry => @room %>
+
+	<%-#--EDITOR OPTIONS--%>
+	<% if @room.editable_by? current_teacher %>
+		<section class="standard actions">
+			<h3 class="section-header">Actions</h3>
+			<ul class="actions-list">
+				<li><%= link_to "Edit Room", edit_school_room_path(@room.school,@room) %></li>
+				<li><%= link_to "Delete Student", delete_school_room_path(@room.school,@room) %></li>
+			</ul>
+		</section>
+	<% end %>
+
+	<%-#--ROOM'S STUDENTS--%>
+	<section class="standard parcel-list-holder">
+		<h3 class="section-header"><%= 'Student'.pluralize(@room.students.size) %></h3>
+		<%= render 'shared/parcel_list', :entries => @room.students %>
+	</section>
+
+</div>
+
+
+<div class="eleven columns omega">
+
+	<section class="standard deletion-prompt">
+		<h1>Are you sure you want to delete <%= @room.name %>?</h1>
+		<p>Room deletion is <strong>permanent</strong>.  This room will be removed from its school.</p>
+			<ul>
+				<li>
+					<%= link_to "Delete", school_room_path(@room.school,@room), method: :delete, :id => "confirm_deletion" %>
+				</li>
+				<li>
+					<%= link_to "Back", school_room_path(@room.school,@room) %>
+				</li>
+			</ul>
+	</section>
+
+</div>

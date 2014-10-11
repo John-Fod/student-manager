@@ -1,11 +1,12 @@
 class Room < ActiveRecord::Base
 
 	validates :name, :presence => true, :uniqueness => {:scope => :school_id}, :length => {:in => 2..25}
+	validates :regular_period, :uniqueness => {:scope => [:school, :regular_teacher, :regular_day]}
 
 	belongs_to :school
 	belongs_to :founding_teacher, class_name: "Teacher", foreign_key: "founding_teacher_id"
 	belongs_to :regular_teacher, class_name: "Teacher", foreign_key: "regular_teacher_id"
-	belongs_to :regular_period, class_name: "Period", foreign_key: "regular_period"
+	belongs_to :regular_period, class_name: "Period", foreign_key: "regular_period_id"
 
 	has_and_belongs_to_many :teachers
 	has_and_belongs_to_many :students

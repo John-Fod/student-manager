@@ -1,6 +1,8 @@
 class ClassSessionsController < ApplicationController
   before_action :set_class_session, only: [:show, :edit, :update, :destroy]
   before_action :set_school, except: [:index]
+  before_action :require_logged_in_teacher, only: [:new, :create, :edit, :update, :delete, :destroy]
+  before_action :require_valid_school_editor, only: [:new, :create, :edit, :update, :delete, :destroy]
   before_action :set_room, except: [:index]
 
   # GET /class_sessions
@@ -39,7 +41,7 @@ class ClassSessionsController < ApplicationController
 
     respond_to do |format|
       if @class_session.save
-        format.html { redirect_to @class_session.school, notice: 'Class session was successfully created.' }
+        format.html { redirect_to school_path(@class_session.school, :day => @class_session.day), notice: 'Class session was successfully created.' }
         format.json { render :show, status: :created, location: @class_session.school }
       else
         format.html { render :new }
@@ -107,6 +109,12 @@ class ClassSessionsController < ApplicationController
       else
         return false
       end        
+    end
+
+    def require_valid_school_editor
+      unless @school.editable_by? current_teacher
+        redirect_to schools_path, :alert => "You do not have permission to edit that school."
+      end
     end
 
 

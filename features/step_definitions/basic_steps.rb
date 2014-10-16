@@ -35,6 +35,16 @@ When(/^I fill in "(.*?)" with "(.*?)"$/) do |form_name, form_value|
 	fill_in("#{form_name}", :with => "#{form_value}")
 end
 
+# SELECT A CHECKBOX
+When(/^I check "(.*?)"$/) do |checkbox_id|
+	check("#{checkbox_id}")
+end
+
+# CHOOSE A RADIO BUTTON
+When(/^I choose the radio button "(.*?)"$/) do |radio_button_id|
+	choose("#{radio_button_id}")
+end
+
 
 # PRESS THE BUTTON ON A FORM
 When(/^I press "(.*?)"$/) do |button_name|

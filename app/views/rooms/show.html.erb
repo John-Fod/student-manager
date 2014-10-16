@@ -33,31 +33,59 @@
 
 <div class="eleven columns omega">
 
-	<%-#TODAYS CLASS SESSION -%>
-	<% if @todays_class_session %>
-		<section class="standard todays-class-session">
-			<h3 class="section-header">Today's <%= "Session".pluralize(@todays_class_session.size) %></h3>
-			
+	<div class="seven columns alpha">
+
+		<%-#TODAYS CLASS SESSION -%>
+		<% if @todays_class_session %>
+			<section class="standard todays-class-session">
+				<h3 class="section-header">Today's <%= "Session".pluralize(@todays_class_session.size) %></h3>
+				<ul>
+					<% @todays_class_session.each do |session| %>
+						<li>
+							<article class="parcel class-session full <%= session.period.end_at < Time.now ? 'complete' : ''%>">
+								<header>
+									<h4>
+										<%= link_to "#{session.day.strftime('%A %b %d')}", school_class_session_path(session.school,session) %>
+										<span class="class-session-period"><%= session.period.name %></span>
+									</h4>
+								</header>
+								<div class="info-holder">
+									<ul class="session-student-list">
+										<% session.room.students.each do |student| %>
+											<li><%= link_to "#{student.name}", school_student_path(student.school,student) %></li>
+										<% end %>
+									</ul>
+								</div>
+							</article>
+						</li>
+					<% end %>
+				</ul>
+			</section>
+		<% end %>
+
+		<%-#UPCOMING CLASS SESSIONS -%>
+		<section class="standard parcel-list-holder">
+			<h3 class="section-header">Upcoming Class Sessions</h3>
+			<%= render 'shared/parcel_list', :entries => @upcoming_class_sessions %>
 		</section>
-	<% end %>
 
-	<%-#UPCOMING CLASS SESSIONS -%>
-	<section class="standard parcel-list-holder">
-		<h3 class="section-header">Upcoming Class Sessions</h3>
-		<%= render 'shared/parcel_list', :entries => @upcoming_class_sessions %>
-	</section>
-
-	<%-#PREVIOUS CLASS SESSIONS -%>
-	<section class="standard parcel-list-holder">
-		<h3 class="section-header">Recent Class Sessions</h3>
-		<%= render 'shared/parcel_list', :entries => @recent_class_sessions %>
-	</section>
+		<%-#PREVIOUS CLASS SESSIONS -%>
+		<section class="standard parcel-list-holder">
+			<h3 class="section-header">Recent Class Sessions</h3>
+			<%= render 'shared/parcel_list', :entries => @recent_class_sessions %>
+		</section>
 
 
-	<%-#--ROOM'S STUDENTS--%>
-	<section class="standard parcel-list-holder">
-		<h3 class="section-header">Students</h3>
-		<%= render 'shared/parcel_list', :entries => @room_students %>
-	</section>
+		<%-#--ROOM'S STUDENTS--%>
+		<section class="standard parcel-list-holder">
+			<h3 class="section-header">Students</h3>
+			<%= render 'shared/parcel_list', :entries => @room_students %>
+		</section>
+
+	</div>
+
+	<div class="four columns omega">
+		h
+	</div>
 
 </div>

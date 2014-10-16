@@ -33,6 +33,26 @@
 
 <div class="eleven columns omega">
 
+	<%-#TODAYS CLASS SESSION -%>
+	<% if @todays_class_session %>
+		<section class="standard todays-class-session">
+			<h3 class="section-header">Today's <%= "Session".pluralize(@todays_class_session.size) %></h3>
+			
+		</section>
+	<% end %>
+
+	<%-#UPCOMING CLASS SESSIONS -%>
+	<section class="standard parcel-list-holder">
+		<h3 class="section-header">Upcoming Class Sessions</h3>
+		<%= render 'shared/parcel_list', :entries => @upcoming_class_sessions %>
+	</section>
+
+	<%-#PREVIOUS CLASS SESSIONS -%>
+	<section class="standard parcel-list-holder">
+		<h3 class="section-header">Recent Class Sessions</h3>
+		<%= render 'shared/parcel_list', :entries => @recent_class_sessions %>
+	</section>
+
 
 	<%-#--ROOM'S STUDENTS--%>
 	<section class="standard parcel-list-holder">

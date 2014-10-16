@@ -15,6 +15,9 @@ class RoomsController < ApplicationController
   # GET /rooms/1.json
   def show
     @room_students = @room.students
+    @recent_class_sessions = @room.class_sessions.where("day < ?", Date.today).order("day DESC").limit(2).reverse
+    @upcoming_class_sessions = @room.class_sessions.where("day > ?", Date.today).order("day DESC").limit(5)
+    @todays_class_session = @room.class_sessions.where("day = ?", Date.today)
   end
 
   # GET /rooms/new
@@ -37,23 +40,25 @@ class RoomsController < ApplicationController
       if @room.save
 
         #-MAKE CLASS SESSIONS FOR A YEAR
-        if @room.regular_day && @room.regular_period
-          start = Time.now.beginning_of_day
-          to = start + 1.year
-          scheduled_class_day = start
-          begin
-            if scheduled_class_day.wday == @room.regular_day
-              new_class_session = ClassSession.new
-              new_class_session.school = @room.school
-              new_class_session.room = @room
-              new_class_session.day = scheduled_class_day.to_date
-              new_class_session.period = @room.regular_period
-              new_class_session.held_at = @room.regular_period.start_at
-              new_class_session.teacher_id = @room.regular_teacher_id if @room.regular_teacher_id
-              new_class_session.save
-            end
-            scheduled_class_day += 1.day
-          end while scheduled_class_day <= to
+        if params[:autoschedule_class_sessions] 
+          if @room.regular_day && @room.regular_period
+            start = Time.now.beginning_of_day
+            to = start + params[:auto_schedule_period].to_i.month
+            scheduled_class_day = start
+            begin
+              if scheduled_class_day.wday == @room.regular_day
+                new_class_session = ClassSession.new
+                new_class_session.school = @room.school
+                new_class_session.room = @room
+                new_class_session.day = scheduled_class_day.to_date
+                new_class_session.period = @room.regular_period
+                new_class_session.held_at = @room.regular_period.start_at
+                new_class_session.teacher_id = @room.regular_teacher_id if @room.regular_teacher_id
+                new_class_session.save
+              end
+              scheduled_class_day += 1.day
+            end while scheduled_class_day <= to
+          end
         end
 
         format.html { redirect_to school_room_path(@room.school,@room), notice: 'Room founding successful.' }

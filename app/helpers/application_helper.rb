@@ -10,6 +10,8 @@ module ApplicationHelper
 			render 'teachers/parcel', :entry => entry
 		elsif entry.is_a?(Student)
 			render 'students/parcel', :entry => entry
+		elsif entry.is_a?(ClassSession)
+			render 'class_sessions/parcel', :entry => entry
 		end
 	end
 

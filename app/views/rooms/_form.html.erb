@@ -66,6 +66,22 @@
           <% end %>
         </li>
       <% end %>
+      <% #----AUTOMATICALLY SCHEDULE CLASS SESSIONS %>
+      <li class="field checkboxes" id="auto-schedule-room-class-sessions">
+        <label id="auto-schedule-menu-toggle">
+          <%= check_box_tag("autoschedule_class_sessions") %>Automatically schedule class sessions?
+        </label>
+        <div id="select-auto-schedule-period">
+          <h6 class="fake-label">For how long?</h6>
+          <ul>
+            <li><label><%= radio_button_tag 'auto_schedule_period', 1, true %>One Month</label></li>
+            <li><label><%= radio_button_tag 'auto_schedule_period', 1 %>Three Months</label></li>
+            <li><label><%= radio_button_tag 'auto_schedule_period', 1 %>Six Months</label></li>
+            <li><label><%= radio_button_tag 'auto_schedule_period', 1 %>One Year</label></li>
+          </ul>
+        <div>
+      </li>
+      </li>
       <%-#--SELECT STUDENTS FOR THE ROOM--%>
       <% if @school.students.size > 0 %>
       <%= hidden_field_tag("room[student_ids][]", nil) %>
@@ -89,3 +105,23 @@
   </div>
 
 <% end %>
+
+
+<script>
+
+  $(document).ready(function () {
+
+    $('#select-auto-schedule-period').hide();
+
+    $('#auto-schedule-menu-toggle').click(function(){
+      if ($('#autoschedule_class_sessions').is(':checked')){
+        $('#select-auto-schedule-period').slideDown(300);
+      }else{
+        $('#select-auto-schedule-period').slideUp(300);
+      };
+
+    });
+
+  });
+  
+</script> 

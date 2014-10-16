@@ -1,0 +1,8 @@
+<article class="parcel class-session <%= entry.period.end_at < Time.now ? 'complete' : ''%>">
+	<header>
+		<h4>
+			<%= link_to "#{entry.day.strftime('%A %b %d')}", school_class_session_path(entry.school,entry) %>
+			<span class="class-session-period"><%= entry.period.name %></span>
+		</h4>
+	</header>
+</article>

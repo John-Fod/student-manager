@@ -96,7 +96,7 @@ class RoomsController < ApplicationController
       @room.class_sessions.each do |class_session|
         class_session.destroy
       end
-      format.html { redirect_to school_rooms_path(@room.school), notice: 'Room was successfully destroyed.' }
+      format.html { redirect_to school_path(@room.school), notice: 'Room deletion successful.' }
       format.json { head :no_content }
     end
   end
@@ -121,7 +121,7 @@ class RoomsController < ApplicationController
 
     def require_valid_school_editor
       unless @school.editable_by? current_teacher
-        redirect_to schools_path, :alert => "You do not have permission to edit that school."
+        redirect_to dashboard_path, :alert => "You do not have permission to edit that school."
       end
     end
 

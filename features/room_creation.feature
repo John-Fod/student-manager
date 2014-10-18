@@ -26,16 +26,22 @@ Background:
   	And I should see a page title of "X-men"
 
   Scenario: A logged in user creates a room and chooses to automatically schedule class sessions
-    Given I am logged in as "akahige@gmail.com"
+    Given the following periods:
+      | name        | school            | start_at        |
+      | First       | Akahige's School  | 09              |
+    And I am logged in as "akahige@gmail.com"
     When I am on the new room page for the school "Akahige's School"
     And I fill in "room_name" with "X-men"
     And I fill in "room_summary" with "These guys are a pain in the ass."
+    And I select today's day of the week as the room's regular day
+    And I select the period "First"
     And I check "autoschedule_class_sessions"
     And I choose the radio button "auto_schedule_period_1"
     And I press "commit"
     Then I should see a flash "notice" of "Room founding successful."
     And I should see a page title of "X-men"
-
+    And I should see a class scheduled "1" week from today
+    And I should see a class scheduled "2" week from today
 
 #----- FORM VALIDATIONS
 #----------------------

@@ -45,13 +45,13 @@
 							<article class="parcel class-session full <%= session.period.end_at < Time.now ? 'complete' : ''%>">
 								<header>
 									<h4>
-										<%= link_to "#{session.day.strftime('%A %b %d')}", school_class_session_path(session.school,session) %>
+										<%= link_to "#{session.display_name}", school_class_session_path(session.school,session) %>
 										<span class="class-session-period"><%= session.period.name %></span>
 									</h4>
 								</header>
 								<div class="info-holder">
 									<ul class="session-student-list">
-										<% session.room.students.each do |student| %>
+										<% session.students.each do |student| %>
 											<li><%= link_to "#{student.name}", school_student_path(student.school,student) %></li>
 										<% end %>
 									</ul>

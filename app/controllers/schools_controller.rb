@@ -89,7 +89,9 @@ class SchoolsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_school
-      @school = School.find(params[:id])
+      unless @school = School.find_by_id(params[:id])
+        redirect_to dashboard_path, :alert => "That school does not exist."
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

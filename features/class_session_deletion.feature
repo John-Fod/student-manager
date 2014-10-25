@@ -25,16 +25,17 @@ Background:
   	| Akahige's School 	| Room 1 			| First Period 			| Akahige    |
 
 
-#----- VIEWING THE PERIODS ON THE SCHOOL'S SHOW PAGE
+#----- THE OPTION TO DELETE A CLASS SESSION FROM THE SCHOOL'S HOME PAGE
 #---------------------------------------------------
 	
   Scenario: A valid user can see the periods on his school's show page
   	Given I am logged in as "akahige@gmail.com"
   	When I am on the show school page for "Akahige's School"
-  	Then I should see the text "First Period" in the element ".period-schedule"
+  	Then I should see the text "Room 1" in the element ".class-session"
+    And I should see the text "Remove" in the element ".class-session header"
 
 
-#----- ADDING CLASS SESSION FROM THE SCHOOL'S SHOW PAGE
+#----- DELETING CLASS SESSION FROM THE SCHOOL'S SHOW PAGE
 #------------------------------------------------------
 
   Scenario: A valid user can add class sessions from his school's show page

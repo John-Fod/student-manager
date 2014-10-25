@@ -67,8 +67,8 @@ Background:
   		| name				| headmaster|
   		| John's School 	| John 		|
   	And the following rooms:
-  	| name 				| school 			| founding_teacher 	|
-  	| John's Room		| John's School  	| John 			|
+  		| name 				| school 			| founding_teacher 	|
+  		| John's Room		| John's School  	| John 			|
     And I am logged in as "john@gmail.com"
   	When I am on the delete room page for the school "Akahige's School" and the room "John's Room"
     Then I should see a page title of "John"
@@ -79,7 +79,40 @@ Background:
 #----------------------------------
 
   Scenario: A logged in teacher attempts to delete a room in a school that doens't exist
+    Given I am logged in as "akahige@gmail.com"
+    When I am on the delete room page for the school "Non-School" and the room "John's Room"
+    Then I should see a page title of "Akahige"
+    And I should see a flash "alert" of "That school does not exist."
 
   Scenario: A logged in teacher attempts to delete a room that doesn't exist in a school that does
+    Given I am logged in as "akahige@gmail.com"
+    When I am on the delete room page for the school "Akahige's School" and the room "Non-Room"
+    Then I should see a page title of "Akahige's School"
+    And I should see a flash "alert" of "That room does not exist."
 
   Scenario: A logged in teacher attempts to delete a room in a school the room doesn't belong to
+    Given the following schools:
+      | name                 | headmaster        |
+      | Redbeards's School   | Akahige           |
+    And the following rooms:
+      | name          | school                | founding_teacher     |
+      | Another Room  | Redbeards's School    | Akahige              |
+    And I am logged in as "akahige@gmail.com"
+    When I am on the delete room page for the school "Akahige's School" and the room "Another Room"
+    Then I should see a page title of "Akahige's School"
+    And I should see a flash "alert" of "That room does not exist."
+
+  Scenario: A logged in teacher attempts to delete a room that doesn't exist in a school he doesn't own
+    Given the following teachers:
+      | name       | email             |
+      | John       | john@gmail.com    |
+    And the following schools:
+      | name        | headmaster  |
+      | John's School   | John    |
+    And the following rooms:
+      | name          | school          | founding_teacher  |
+      | John's Room   | John's School   | John      |
+    And I am logged in as "john@gmail.com"
+    When I am on the delete room page for the school "Akahige's School" and the room "Non-Room"
+    Then I should see a page title of "John"
+    And I should see a flash "alert" of "You do not have permission to edit that school."

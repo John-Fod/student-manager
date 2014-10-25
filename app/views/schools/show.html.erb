@@ -70,7 +70,7 @@
 						<td class="class-session">
 							<% if class_this_period = ClassSession.where(:school => @school, :day => @day, :teacher => teacher, :period => period).first %>
 								<header>
-									<h5><%= link_to "#{class_this_period.room.name}", school_room_path(@school,class_this_period.room) %></h5>
+									<h5><%= link_to "#{class_this_period.room.name}", school_class_session_path(@school,class_this_period) %></h5>
 									<%= link_to "Edit", edit_school_class_session_path(@school,class_this_period), :class => "free-edit", :id => "edit-period-room-#{class_this_period.room.to_param}-period-#{period.to_param}" %>
 									<%= link_to "Remove", school_class_session_path(@school,class_this_period), :method => :delete, :class => "free-delete", :id => "delete-period-room-#{class_this_period.room.to_param}-period-#{period.to_param}" %>
 								</header>
@@ -89,6 +89,7 @@
 										<%= f.hidden_field :teacher_id, :value => teacher.to_param %>
 										<%= f.hidden_field :held_at, :value => period.start_at %>
 										<%= f.hidden_field :day, :value => @day %>
+										<%= f.hidden_field :quick_creation, :value => true %>
 										<%= f.submit "Add Session", :id => "add-session-period-#{period.to_param}-teacher-#{teacher.to_param}" %>
 								 	</div>
 								<% end %>

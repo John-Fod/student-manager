@@ -46,6 +46,22 @@ section.standard{
 			color:red;
 		}
 	}
+
+	&.summary{
+
+		.section-header{
+			font-size:							25px;
+			line-height:						1.2em;
+		}
+
+		p{
+			display:								block;
+			margin:									3px 15px;
+			font-family:						$sans;
+			font-size:							14px;
+			color:									$grey-verydark;
+		}
+	}
 }
 
 

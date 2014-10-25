@@ -1,34 +1,54 @@
-<p id="notice"><%= notice %></p>
+<div class="five columns alpha">
 
-<p>
-  <strong>Room:</strong>
-  <%= @class_session.room_id %>
-</p>
+  <%-#--SCHOOLS' BANNER--%>
+  <%= render 'schools/banner', :entry => @school %>
 
-<p>
-  <strong>Teacher:</strong>
-  <%= @class_session.teacher_id %>
-</p>
+  <%-#--CLASS SESSIONS HEADER --%>
+  <%= render 'class_sessions/header', :entry => @class_session %>
 
-<p>
-  <strong>School:</strong>
-  <%= @class_session.school_id %>
-</p>
+  <%-#--ROOM'S BASIC INFO--%>
+  <section class="standard quick-info-holder">
+    <h3 class="section-header">Session Info</h3>
+    <dl>
+      <dt>Students</dt>
+        <dd><%= @class_session.students.size %></dd>
+    </dl>
+  </section>
 
-<p>
-  <strong>Name:</strong>
-  <%= @class_session.name %>
-</p>
+  <%-#--HEADMASTER'S ACTIONS--%>
+  <% if @school.editable_by? current_teacher %>
+    <section class="standard actions">
+      <h3 class="section-header">Actions</h3>
+      <ul class="actions-list">
+        <li><%= link_to "New Session", new_school_class_session_path(@school, @class_session) %></li>
+        <li><%= link_to "Edit Session", edit_school_class_session_path(@school, @class_session) %></li>
+        <li><%= link_to "Delete Room", delete_school_class_session_path(@school, @class_session) %></li>
+      </ul>
+    </section>
+  <% end %> 
 
-<p>
-  <strong>Summary:</strong>
-  <%= @class_session.summary %>
-</p>
+</div>
 
-<p>
-  <strong>Held at:</strong>
-  <%= @class_session.held_at %>
-</p>
+<div class="eleven columns omega">
 
-<%= link_to 'Edit', edit_class_session_path(@class_session) %> |
-<%= link_to 'Back', class_sessions_path %>
+  <div class="seven columns alpha">
+
+    <%-#--CLASS SESSION'S SUMMARY--%>
+    <section class="standard summary">
+      <h3 class="section-header">Summary</h3>
+      <p><%= @class_session.summary %></p>
+    </section>
+
+    <%-#--ROOM'S STUDENTS--%>
+    <section class="standard parcel-list-holder">
+      <h3 class="section-header">Students</h3>
+      <%= render 'shared/parcel_list', :entries => @class_session.students %>
+    </section>
+
+  </div>
+
+  <div class="four columns omega">
+    h
+  </div>
+
+</div>

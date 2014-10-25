@@ -24,6 +24,9 @@ class ClassSessionsController < ApplicationController
 
     if @room
       @potential_students = @room.students + (@school.students.order(:name => :asc) - @room.students)
+      @room.students.each do |student|
+        @class_session.students << student
+      end
     else
       @potential_students = @class_session.school.students
     end
@@ -32,12 +35,25 @@ class ClassSessionsController < ApplicationController
 
   # GET /class_sessions/1/edit
   def edit
+
+    if @class_session.room
+      @potential_students = @class_session.room.students + (@school.students.order(:name => :asc) - @class_session.room.students)
+    else
+      @potential_students = @class_session.school.students
+    end
+
   end
 
   # POST /class_sessions
   # POST /class_sessions.json
   def create
     @class_session = ClassSession.new(class_session_params)
+
+    if ((@class_session.room) && (@class_session.quick_creation==true))
+      @class_session.room.students.each do |student|
+        @class_session.students << student
+      end
+    end
 
     respond_to do |format|
       if @class_session.save
@@ -55,7 +71,7 @@ class ClassSessionsController < ApplicationController
   def update
     respond_to do |format|
       if @class_session.update(class_session_params)
-        format.html { redirect_to @class_session, notice: 'Class session was successfully updated.' }
+        format.html { redirect_to school_class_session_path(@class_session.school, @class_session), notice: 'Class session was successfully updated.' }
         format.json { render :show, status: :ok, location: @class_session }
       else
         format.html { render :edit }
@@ -82,7 +98,17 @@ class ClassSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def class_session_params
-      params.require(:class_session).permit(:room_id, :teacher_id, :school_id, :name, :summary, :held_at, :day, :period_id)
+      params.require(:class_session).permit(
+        :room_id,
+        :teacher_id,
+        :school_id,
+        :name,
+        :summary,
+        :held_at,
+        :day,
+        :period_id,
+        :quick_creation,
+        :student_ids => [])
     end
 
     def set_school

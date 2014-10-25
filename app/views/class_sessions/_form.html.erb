@@ -15,13 +15,27 @@
     <%= f.hidden_field :room_id %>
     <%= f.hidden_field :school_id %>
     <ul>
+      <% unless @class_session.room %>
+        <li class="field room select">
+          <%= f.label :room_id, "Room" %>
+          <% if @school.rooms.size > 1 %>
+            <%= f.select :room_id, @school.rooms.all.map { |r| ["#{r.name}", r.id]} %>
+          <% else %>
+            <li class="field room select">
+              <%= f.select :room_id, [
+                ["#{@school.rooms.first.name}", @school.rooms.first.id]
+              ]
+              %>
+            </li>
+          <% end %>
+        </li>
+      <% end %>
       <li class="field">
         <%= f.label :teacher_id %>
-        <%= f.number_field :teacher_id %>
-        <%= f.select :teacher_id, @school.teachers.all.map{ |t| [t.name, "#{t.id}"] } %>
+        <%= f.select :teacher_id, @school.all_teachers.map{ |t| [t.name, "#{t.id}"] } %>
       </li>
       <li class="field">
-        <%= f.label :name %>
+        <%= f.label :name, "Name (optional)" %>
         <%= f.text_field :name %>
       </li>
       <li class="field">
@@ -38,7 +52,7 @@
             <% @potential_students.each do |student| %>
               <li>
                 <label <%= @room && student.in?(@room.students) ? "class='in-room'" : "" %>>
-                  <%= check_box_tag("class_session[student_ids][]", student.id, (@room && student.in?(@room.students))) %> <%= student.name %>
+                  <%= check_box_tag("class_session[student_ids][]", student.id, (@class_session && student.in?(@class_session.students))) %> <%= student.name %>
                 </label>
               </li>
             <% end %>
@@ -46,9 +60,25 @@
         </li>
       <% end %>
 
-      <li class="field">
-        <%= f.label :held_at %>
-        <%= f.datetime_select :held_at %>
+      <% if @school.periods.size > 0 %>
+        <li class="field period select">
+          <%= f.label :period_id, "Period" %>
+          <% if @school.periods.size > 1 %>
+            <%= f.select :period_id, @school.periods.all.map { |p| ["#{p.name}", p.id]} %>
+          <% else %>
+            <li class="field period select">
+              <%= f.select :period_id, [
+                ["#{@school.periods.first.name}", @school.periods.first.id]
+              ]
+              %>
+            </li>
+          <% end %>
+        </li>
+      <% end %>
+
+      <li class="field datetime">
+        <%= f.label :day %>
+        <%= f.date_select :day %>
       </li>
       <li class="actions">
         <%= f.submit %>

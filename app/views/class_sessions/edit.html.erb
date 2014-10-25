@@ -1,6 +1,27 @@
-<h1>Editing class_session</h1>
+<div class="five columns alpha">
 
-<%= render 'form' %>
+	<%-#--SCHOOLS' BANNER--%>
+	<%= render 'schools/banner', :entry => @school %>
 
-<%= link_to 'Show', @class_session %> |
-<%= link_to 'Back', class_sessions_path %>
+	<%-#--ROOMS'S HEADER--%>
+	<%= render 'rooms/header', :entry => @room if @room %>
+
+	<%-#--QUICK INFO--%>
+	<section class="standard quick-info-holder">
+		<h3 class="section-header">School Info</h3>
+		<dl class="quick-info">
+			<dt>Students</dt>
+				<dd><%= @school.students.count %></dd>
+			<dt>Rooms</dt>
+				<dd><%= @school.rooms.count %></dd>
+		</dl>
+	</section>
+	
+
+</div>
+
+<div class="eleven columns omega">
+
+	<%= render 'form' %>
+
+</div>

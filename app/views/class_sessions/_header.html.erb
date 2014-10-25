@@ -1,0 +1,13 @@
+<header id="page-header" class="class-session-header page-header">
+	<h1 class="section-header">
+		<% if entry.room %>
+			<%= link_to "#{entry.room.name}", school_room_path(entry.room.school, entry.room) %>
+		<% end %>
+	</h1>
+	<dl class="class-session-header-info-list">
+		<dt>Day</dt>
+			<dd><%= entry.day.strftime('%A %b %d') %></dd>
+		<dt>Period</dt>
+			<dd><%= entry.period.name %></dd>
+	</dl>
+</header>

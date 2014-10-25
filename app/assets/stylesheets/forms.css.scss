@@ -8,6 +8,7 @@
 -ERROR MESSAGE
 -INPUTS
 -CHECKBOXES
+-DATETIME SELECT
 
 
 
@@ -55,6 +56,36 @@ form .checkboxes{
 		margin-right:							-4px;
 
 		li{
+		}
+	}
+}
+
+/****DATETIME SELECT
+*******************/
+.datetime{
+
+	select{
+		display:										inline;
+		min-width:									30px;
+		width:											70px;
+		margin-left:								0px;
+		margin-right:								0px;
+
+		&:nth-child(2){
+			width:										60px;
+		}
+
+		&:nth-child(3){
+			width:										80px;
+		}
+
+		&:nth-child(4),
+		&:nth-child(5){
+			width:										50px;
+		}
+
+		&:nth-child(6){
+			width:										50px;
 		}
 	}
 }

@@ -8,6 +8,7 @@
 -EDIT LINKS
 -FREE DELETE
 -FREE EDIT
+-NOTHING FOUND
 
 
 
@@ -78,4 +79,18 @@
 		background-color:						$base-light;
 		color:											$support-verydark;
 	}
+}
+
+
+/****NOTHING FOUND
+*****************/
+.nothing-found{
+	display:											block;
+	margin:												3px 7px;
+	background-color:							$base-light;
+	border:												1px solid $base-dark;
+	padding:											2px 5px;
+	text-align:										center;
+	font-family:									$serifs;
+	font-weight:									bold;
 }

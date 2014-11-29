@@ -52,7 +52,7 @@ When(/^I press "(.*?)"$/) do |button_name|
 end
 
 # SELECT AN OPTION FROM A DROPDOWN
-When(/^I select (".*?)" from the dropdown "(.*?)"$/) do |option_name, dropdown_name|
+When(/^I select "(.*?)" from the dropdown "(.*?)"$/) do |option_name, dropdown_name|
 	select "#{option_name}", :from => "#{dropdown_name}"
 end
 

@@ -1,7 +1,7 @@
 class PeriodsController < ApplicationController
 
   before_action :set_school, only: [:show, :new, :create, :edit, :update, :delete, :destroy]
-  before_action :set_period, only: [:show, :edit, :update, :destroy]
+  before_action :set_period, only: [:show, :edit, :update, :destroy, :delete]
 
   # GET /periods
   # GET /periods.json
@@ -45,13 +45,17 @@ class PeriodsController < ApplicationController
   def update
     respond_to do |format|
       if @period.update(period_params)
-        format.html { redirect_to @period.school, notice: 'Period was successfully updated.' }
-        format.json { render :show, status: :ok, location: @period.school }
+        format.html { redirect_to school_period_path(@period.school, @period), notice: 'Period was successfully updated.' }
+        format.json { render :show, status: :ok, location: school_period_path(@period.school, @period) }
       else
         format.html { render :edit }
         format.json { render json: @period.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def delete
+
   end
 
   # DELETE /periods/1

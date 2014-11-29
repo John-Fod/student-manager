@@ -16,19 +16,21 @@
     <%= f.hidden_field :school_id %>
     <ul>
       <% unless @class_session.room %>
-        <li class="field room select">
-          <%= f.label :room_id, "Room" %>
-          <% if @school.rooms.size > 1 %>
-            <%= f.select :room_id, @school.rooms.all.map { |r| ["#{r.name}", r.id]} %>
-          <% else %>
-            <li class="field room select">
-              <%= f.select :room_id, [
-                ["#{@school.rooms.first.name}", @school.rooms.first.id]
-              ]
-              %>
-            </li>
-          <% end %>
-        </li>
+        <% if @school.rooms.size > 0 %>
+          <li class="field room select">
+            <%= f.label :room_id, "Room" %>
+            <% if @school.rooms.size > 1 %>
+              <%= f.select :room_id, @school.rooms.all.map { |r| ["#{r.name}", r.id]} %>
+            <% else %>
+              <li class="field room select">
+                <%= f.select :room_id, [
+                  ["#{@school.rooms.first.name}", @school.rooms.first.id]
+                ]
+                %>
+              </li>
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
       <li class="field">
         <%= f.label :teacher_id %>
@@ -81,7 +83,7 @@
         <%= f.date_select :day %>
       </li>
       <li class="actions">
-        <%= f.submit %>
+        <%= f.submit "Update Class Session", :id => "commit" %>
       </li>
     </ul>
   </div>

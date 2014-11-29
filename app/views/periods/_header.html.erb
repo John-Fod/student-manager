@@ -1,0 +1,8 @@
+<header id="page-header" class="teacher-header page-header">
+	<h1 class="section-header">
+		<%= link_to "#{entry.name}", school_period_path(entry.school, entry) %>
+		<% if defined? subtitle %>
+			<span class="header-subtitle"><%= subtitle %></span>
+		<% end %>
+	</h1>
+</header>

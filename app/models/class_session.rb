@@ -3,7 +3,6 @@ class ClassSession < ActiveRecord::Base
 	validates :school, :presence => true
 	validates :period, :presence => true, :uniqueness => {:scope => [:school, :teacher, :day]}
 	validates :teacher, :presence => true
-	validates :room, :presence => true
 
 	belongs_to :teacher
 	belongs_to :room

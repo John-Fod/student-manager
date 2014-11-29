@@ -38,6 +38,8 @@ form select{
 /****CHECKBOXES
 **************/
 form .checkboxes{
+	width:										62%;
+	min-width:								250px;
 
 	.fake-label{
 		margin-bottom:						-1px;
@@ -76,7 +78,7 @@ form .checkboxes{
 		}
 
 		&:nth-child(3){
-			width:										80px;
+			width:										100px;
 		}
 
 		&:nth-child(4),

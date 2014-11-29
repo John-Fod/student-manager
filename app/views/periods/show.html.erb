@@ -1,4 +1,43 @@
-<p id="notice"><%= notice %></p>
+<div class="five columns alpha">
 
-<%= link_to 'Edit', edit_period_path(@period) %> |
-<%= link_to 'Back', periods_path %>
+	<%-#--SCHOOLS' BANNER--%>
+	<%= render 'schools/banner', :entry => @school %>
+
+	<%-#--ROOMS'S HEADER--%>
+	<%= render 'header', :entry => @period %>
+
+	<%-#--PERIOD'S BASIC INFO--%>
+	<section class="standard quick-info-holder">
+		<h3 class="section-header">Period Info</h3>
+		<dl>
+			<dt>Start Time</dt>
+				<dd><%= @period.start_at.strftime("%H:%M %P") %></dd>
+			<dt>End Time</dt>
+				<dd><%= @period.end_at.strftime("%H:%M %P") %></dd>
+		</dl>
+	</section>
+
+	<%-#--HEADMASTER'S ACTIONS--%>
+	<% if @school.editable_by? current_teacher %>
+		<section class="standard actions">
+			<h3 class="section-header">Actions</h3>
+			<ul class="actions-list">
+				<li><%= link_to "Edit Period", edit_school_period_path(@school, @period) %></li>
+				<li><%= link_to "Delete Period", delete_school_period_path(@school, @period) %></li>
+			</ul>
+		</section>
+	<% end %>	
+
+</div>
+
+<div class="eleven columns omega">
+
+	<div class="seven columns alpha">
+
+	</div>
+
+	<div class="four columns omega">
+
+	</div>
+
+</div>

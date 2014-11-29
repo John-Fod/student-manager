@@ -121,6 +121,6 @@ end
 # CONFIRMING A CLASS IS SCHEDULED IN ONE WEEK
 Then(/^I should see a class scheduled "(.*?)" week from today$/) do |number_of_weeks|
 	target_time = Time.now.beginning_of_day+(number_of_weeks.to_i).weeks
-	target_time_as_string = target_time.strftime('%A %b %d')
+	target_time_as_string = target_time.strftime('%b %d')
 	find("#upcomming-class-sessions ul").should have_content("#{target_time_as_string}")
 end

@@ -1,7 +1,7 @@
 class ClassSessionsController < ApplicationController
+  before_action :require_logged_in_teacher, only: [:new, :create, :edit, :update, :delete, :destroy]
   before_action :set_class_session, only: [:show, :edit, :update, :destroy]
   before_action :set_school, except: [:index]
-  before_action :require_logged_in_teacher, only: [:new, :create, :edit, :update, :delete, :destroy]
   before_action :require_valid_school_editor, only: [:new, :create, :edit, :update, :delete, :destroy]
   before_action :set_room, except: [:index]
 
@@ -60,6 +60,16 @@ class ClassSessionsController < ApplicationController
         format.html { redirect_to school_path(@class_session.school, :day => @class_session.day), notice: 'Class session was successfully created.' }
         format.json { render :show, status: :created, location: @class_session.school }
       else
+
+        if @class_session.room
+          @potential_students = @class_session.room.students + (@school.students.order(:name => :asc) - @class_session.room.students)
+          @class_session.room.students.each do |student|
+          @class_session.students << student
+        end
+      else
+        @potential_students = @class_session.school.students
+      end
+
         format.html { render :new }
         format.json { render json: @class_session.errors, status: :unprocessable_entity }
       end
@@ -113,7 +123,7 @@ class ClassSessionsController < ApplicationController
 
     def set_school
       unless @school = School.find_by_id(params[:school_id])
-        redirect_to schools_path, :alert => "That school does not exist."
+        redirect_to dashboard_path, :alert => "That school does not exist."
       end
     end
 
@@ -139,7 +149,7 @@ class ClassSessionsController < ApplicationController
 
     def require_valid_school_editor
       unless @school.editable_by? current_teacher
-        redirect_to schools_path, :alert => "You do not have permission to edit that school."
+        redirect_to dashboard_path, :alert => "You do not have permission to edit that school."
       end
     end
 

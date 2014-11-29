@@ -1,5 +1,5 @@
 <ul class="parcel-list">
-	<% if entries %>
+	<% if entries.size > 0 %>
 		<% entries.each do |entry| %>
 			<li><%= parcel_for(entry) %></li>
 		<% end %>

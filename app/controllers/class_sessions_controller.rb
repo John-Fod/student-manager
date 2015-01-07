@@ -111,6 +111,7 @@ class ClassSessionsController < ApplicationController
       params.require(:class_session).permit(
         :room_id,
         :teacher_id,
+        :status,
         :school_id,
         :name,
         :summary,

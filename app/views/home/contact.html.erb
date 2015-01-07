@@ -1,5 +1,247 @@
 <section class="standard contact-options">
-	<ul>
-		<li>john.fodrocy@gmail.com</li>
-	</ul>
+	<div id="solar-system-holder">
+		<canvas id="solar-system" height="500px" width="500px" >
+
+		</canvas>
+
+	</div>
 </section>
+
+
+
+
+
+
+
+<script>
+
+	$(document).ready(function () {
+
+
+		var canvas = document.getElementById("solar-system");
+		var ctx = canvas.getContext("2d");
+
+		var orbitHorizontalCenter = canvas.width/2;
+		var orbitVerticalCenter = canvas.height/2;
+
+		var speedMultiplier = 50;
+
+
+		var planets = [
+			mercury = {
+				id:0,
+				name:"Mercury",
+				yCo:0,
+				xCo:0,
+				radius:2439.7,
+				perihelionDistance:58,
+				aphelionDistance:58,
+				speed:56.6,
+				color:"#777777",
+				pathRadians:Math.floor((Math.random() * 359) + 1),
+				radiansSpeed:1,
+				yearLength:0.24436111*speedMultiplier,
+				moons:[
+				]
+			},
+			venus = {
+				id:1,
+				name:"Venus",
+				yCo:0,
+				xCo:0,
+				radius:6052,
+				perihelionDistance:108,
+				aphelionDistance:108,
+				speed:35.02,
+				color:"#E8A200",
+				pathRadians:Math.floor((Math.random() * 359) + 1),
+				radiansSpeed:1,
+				yearLength:0.624166*speedMultiplier,
+				moons:[
+				]
+			},
+			earth = {
+				id:2,
+				name:"Earth",
+				yCo:0,
+				xCo:0,
+				radius:7371,
+				perihelionDistance:150,
+				aphelionDistance:150,
+				speed:30,
+				color:"#0F00E8",
+				pathRadians:Math.floor((Math.random() * 359) + 1),
+				radiansSpeed:1,
+				yearLength:1*speedMultiplier,
+				moons:[
+					theMoon = {
+						name:"The Moon",
+						yCo:0,
+						xCo:0,
+						radius:3475,
+						perigee:0.362600,
+						apogee:0.405400,
+						speed:1.02,
+						color:"#333333",
+						yearLength:0.0747*speedMultiplier,
+						pathRadians:0
+					}
+				]
+			},
+			mars = {
+				id:3,
+				name:"Mars",
+				xAxis:0,
+				yAxis:0,
+				yCo:0,
+				xCo:0,
+				radius:3390,
+				perihelionDistance:228,
+				aphelionDistance:228,
+				speed:24,
+				color:"#FF101E",
+				pathRadians:Math.floor((Math.random() * 359) + 1),
+				radiansSpeed:1,
+				yearLength:1.90833333*speedMultiplier,
+				moons:[
+					phobos = {
+						name:"Phobos",
+						yCo:0,
+						xCo:0,
+						radius:13.5,
+						perigee:0.09377,
+						apogee:0.405400,
+						speed:2.123,
+						color:"#222222",
+						yearLength:0.001*speedMultiplier,
+						pathRadians:0
+					},
+					deimos = {
+						name:"Deimos",
+						xCo:0,
+						yCo:0,
+						radius:7.5,
+						perigee:0.23460,
+						apogee:0.405400,
+						speed:1.35,
+						color:"#222222",
+						yearLength:0.00342*speedMultiplier,
+						pathRadians:0
+					}
+				]
+			}
+		];
+
+		drawOrbits();
+		drawPlanets(planets);
+		updatePlanets(planets);
+		updateMoons(planets);
+
+		var intervalTime = 25;
+
+		setInterval(function(){ 
+			updatePlanets(planets);
+			clearCanvas(canvas);
+			drawOrbits();
+			drawPlanets(planets);
+		}, intervalTime);
+
+		setInterval(function(){ 
+			updateMoons(planets);
+			drawMoons(planets);
+		}, intervalTime);
+
+
+		function drawPlanets(planets){
+			for(i=0; i<planets.length; i++){
+				drawPlanet(planets[i]);
+			}
+		}
+
+		function drawMoons(planets){
+			for(i=0; i<planets.length; i++){
+				if (planets[i].moons.length>0){
+					for(j=0; j<planets[i].moons.length; j++){
+						drawMoon(planets[i].moons[j]);
+					}
+				}
+			}
+		}
+
+		function updatePlanets(planets){
+			for(i=0; i<planets.length; i++){
+				planets[i].pathRadians = planets[i].pathRadians-((360/planets[i].yearLength)/10000);
+			}
+		}
+
+		function drawOrbits(){
+
+			for(i=0; i<planets.length; i++){
+				var planet = planets[i];
+				ctx.beginPath();
+				ctx.arc(orbitHorizontalCenter, orbitVerticalCenter, planet.perihelionDistance, 0, 2 * Math.PI, false);
+				ctx.lineWidth = .25;
+				ctx.strokeStyle = "#ffffff";
+				ctx.stroke();
+			}
+		}
+
+		function drawPlanet(planet){
+			var orbitHorizontalCenter = canvas.width/2;
+			var orbitVerticalCenter = canvas.height/2;
+			planet.xCo = orbitHorizontalCenter + planet.perihelionDistance * Math.cos(planet.pathRadians);
+			planet.yCo = orbitVerticalCenter + planet.perihelionDistance * Math.sin(planet.pathRadians);
+			ctx.beginPath();
+			ctx.arc(planet.xCo, planet.yCo, planet.radius/1000, 0, 2 * Math.PI, false);
+			ctx.fillStyle = planet.color;
+			ctx.fill();
+			ctx.lineWidth = .25;
+			ctx.strokeStyle = planet.color;
+			ctx.stroke();
+		}
+
+		function drawMoon(moon){
+			ctx.beginPath();
+			ctx.arc(moon.xCo, moon.yCo, 1, 0, 2 * Math.PI, false);
+			ctx.fillStyle = "#ffffff";
+			ctx.fill();
+			ctx.lineWidth = 1;
+			ctx.strokeStyle = "#ffffff";
+			ctx.stroke();
+		}
+
+		function updatePlanet(planet){
+			planet.pathRadians = planet.pathRaians+360/planet.radiansSpeed;
+			updatePlanetMoon(planet);
+		}
+
+		function updateMoons(planets){
+			for(i=0; i<planets.length; i++){
+				if (planets[i].moons.length>0){
+					for(j=0; j<planets[i].moons.length; j++){
+						updateMoon(planets[i].moons[j],planets[i]);
+					}
+				}
+			}
+		}
+
+		function updateMoon(moon,planet){
+			futurePlanetXCo = orbitVerticalCenter + planet.perihelionDistance * Math.sin(planet.pathRadians);
+			futurePlanetYCo = orbitVerticalCenter + planet.perihelionDistance * Math.sin(planet.pathRadians);
+			moon.xCo = planet.xCo + moon.perigee*50 * Math.cos(moon.pathRadians);
+			moon.yCo = planet.yCo + moon.perigee*50 * Math.sin(moon.pathRadians);
+			moon.pathRadians = moon.pathRadians-((360/moon.yearLength)/10000);
+		}
+
+		function clearCanvas(canvas){
+			ctx.fillStyle = "#000000";
+			ctx.fill();
+			ctx.fillRect(0,0,canvas.width,canvas.height);
+		}
+
+
+
+	});
+
+  
+</script> 

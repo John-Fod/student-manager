@@ -46,6 +46,7 @@ Background:
     And I press "commit"
     Then I should see a flash "notice" of "Class session was successfully created."
     And I should see the text "New Class Session" in the element ".period-schedule .period-row .class-session"
+    And I should see the text "On Schedule" in the element ".class-session-status"
 
   Scenario: A valid user adds a new class session to a room
     Given I am logged in as "akahige@gmail.com"
@@ -56,6 +57,7 @@ Background:
     And I press "commit"
     Then I should see a flash "notice" of "Class session was successfully created."
     And I should see the text "New Class Session" in the element ".period-schedule .period-row .class-session"
+    And I should see the text "On Schedule" in the element ".class-session-status"
 
   Scenario: A valid user adds a new class session to a school with no rooms
     Given the following schools:
@@ -75,6 +77,7 @@ Background:
     And I press "commit"
     Then I should see a flash "notice" of "Class session was successfully created."
     And I should see the text "New Class Session" in the element ".period-schedule .period-row .class-session"
+    And I should see the text "On Schedule" in the element ".class-session-status"
 
 
 #----- ADDING CLASS SESSION FROM THE SCHOOL'S SHOW PAGE
@@ -86,6 +89,7 @@ Background:
   	And I quickly add room "Room 1" for period "First Period" and teacher "Akahige"
   	Then I should see a flash "notice" of "Class session was successfully created."
   	And I should see the text "Room 1" in the element ".period-schedule .period-row .class-session"
+    And I should see the text "On Schedule" in the element ".class-session-status"
 
 #----- USER VALIDATIONS
 #----------------------

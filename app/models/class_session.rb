@@ -13,6 +13,16 @@ class ClassSession < ActiveRecord::Base
 
 	before_save :add_start_and_end_at
 
+	@@status = [
+		"On Schedule",
+		"Cancelled",
+		"Finished"
+	]
+
+	def self.status
+		@@status
+	end
+
 	def display_name
 		if self.name && self.name!=""
 			return self.name
@@ -37,6 +47,11 @@ class ClassSession < ActiveRecord::Base
 		period_end = self.period.end_at
 		self.start_time = DateTime.new(day.year, day.month, day.day, period_start.hour, period_start.min, period_start.sec)
 		self.end_time = DateTime.new(day.year, day.month, day.day, period_end.hour, period_end.min, period_end.sec)
+	end
+
+	def status_name
+		status_integer = self.status
+		ClassSession.status[status_integer]
 	end
 
 

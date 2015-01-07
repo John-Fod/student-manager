@@ -9,5 +9,7 @@
 			<dd><%= entry.day.strftime('%A %b %d') %></dd>
 		<dt>Period</dt>
 			<dd><%= entry.period.name %></dd>
+		<dt>Status</dt>
+			<dd><%= entry.status_name.capitalize.split.map(&:capitalize).join(' ') %></dd>
 	</dl>
 </header>

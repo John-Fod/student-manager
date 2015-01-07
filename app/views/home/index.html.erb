@@ -1,2 +1,205 @@
 <h1>Welcome</h1>
 <p>Find me in app/views/home/index.html.erb</p>
+<canvas id="test-canvas" width="700" height="700"></canvas>
+<input type="text">Hi</input>
+
+<script>
+
+	$(document).ready(function () {
+
+		var stars = [
+			sun = {
+				name:"Sun",
+				x:27,
+				y:77,
+				radius: 10,
+				color:"FFF8E2",
+				xMomentum:3,
+				yMomentum:10
+			},
+			green = {
+				name:"Green",
+				x:127,
+				y:177,
+				radius: 5,
+				color:"8BFF66",
+				xMomentum:2,
+				yMomentum:5
+			},
+			blue = {
+				name:"Blue",
+				x:151,
+				y:200,
+				radius: 7,
+				color:"B2D5FF",
+				xMomentum:7,
+				yMomentum:3
+			},
+			red = {
+				name:"Red",
+				x:250,
+				y:10,
+				radius: 4,
+				color:"FF0D1E",
+				xMomentum:5,
+				yMomentum:1
+			}
+		];
+
+		var orbiter = {
+			radius:50,
+			radians:1,
+			xAxis:100,
+			yAxis:100
+		};
+ 
+
+		var canvasWidth = 300;
+		var canvasHeight = 225;
+		var canvas = document.getElementById("test-canvas");
+		var ctx = canvas.getContext("2d");
+
+
+		ctx.fillRect(0,0,canvasWidth,canvasHeight);
+
+
+		function updateStarLocation(){
+			for(i=0; i<stars.length; i=i+1){
+
+				if (stars[i]["x"]>canvasWidth-stars[i].radius){
+					stars[i]["xMomentum"] = Math.abs(stars[i]["xMomentum"]) * -1
+				}
+
+				if (stars[i]["x"]<0+stars[i].radius){
+					stars[i]["xMomentum"] = Math.abs(stars[i]["xMomentum"])
+				}
+
+				if (stars[i]["y"]>canvasHeight-stars[i].radius){
+					stars[i]["yMomentum"] = Math.abs(stars[i]["yMomentum"]) * -1
+				}
+
+				if (stars[i]["y"]<0+stars[i].radius){
+					stars[i]["yMomentum"] = Math.abs(stars[i]["yMomentum"])
+				}
+
+				stars[i]["x"] = stars[i]["x"] + stars[i]["xMomentum"];
+				stars[i]["y"] = stars[i]["y"] + stars[i]["yMomentum"];
+			};
+		}
+
+
+
+		function draw_stars(){
+
+			//DRAW THE STARS
+			for(i=0; i<stars.length; i=i+1){
+				ctx.beginPath();
+				ctx.arc(stars[i]["x"], stars[i]["y"], stars[i].radius, 0, 2 * Math.PI, false);
+				ctx.fillStyle = "#"+stars[i]["color"];
+				ctx.fill();
+				ctx.lineWidth = 1;
+				ctx.strokeStyle = "#"+stars[i]["color"];
+				ctx.stroke();
+			};
+
+		};
+
+		function drawOrbiter(orbiter){
+			xCo = orbiter.xAxis + orbiter.radius * Math.cos(orbiter.radians);
+			yCo = orbiter.yAxis + orbiter.radius * Math.sin(orbiter.radians);
+			ctx.beginPath();
+			ctx.arc(xCo, yCo, 2, 0, 2 * Math.PI, false);
+			ctx.fillStyle = "#ffffff";
+			ctx.fill();
+			ctx.lineWidth = 1;
+			ctx.strokeStyle = "#ffffff";
+			ctx.stroke();
+		}
+
+		function updateOrbiter(orbiter){
+			if (orbiter.radians <= 360) {
+				orbiter.radians = orbiter.radians+.05;
+			} else {
+				orbiter.radians = 0;
+			}
+		}
+
+		draw_stars();
+
+		function draw_rect(){
+			ctx.fillRect(250,175,50,50);
+
+			
+			ctx.beginPath();
+			ctx.moveTo(125,125);
+			ctx.lineTo(125,45);
+			ctx.lineTo(45,125);
+			ctx.closePath();
+			ctx.stroke();
+
+			for (i=0;i<=300;i=i+25){
+				ctx.lineWidth = 1;
+				ctx.beginPath();
+				ctx.moveTo(i,0);
+				ctx.lineTo(i,225);
+				ctx.closePath();
+				ctx.stroke();
+			}
+
+			for (i=0;i<=225;i=i+25){
+				ctx.lineWidth = 1;
+				ctx.beginPath();
+				ctx.moveTo(0,i);
+				ctx.lineTo(300,i);
+				ctx.closePath();
+				ctx.stroke();
+			}
+
+		}
+
+		//draw_rect();
+
+		function drawLine(starOne,starTwo){
+			ctx.beginPath();
+			ctx.moveTo(starOne["x"],starOne["y"]);
+			ctx.lineTo(starTwo["x"],starTwo["y"]);
+			ctx.strokeStyle = "#ffffff";
+			ctx.closePath();
+			ctx.stroke;
+		}
+
+
+		setInterval(function(){ 
+			updateStarLocation();
+			updateOrbiter(orbiter);
+			ctx.fillStyle = "#000000";
+			ctx.fillRect(0,0,canvasWidth,canvasHeight);
+			draw_stars();
+			drawBezierCurve();
+			drawOrbiter(orbiter);
+			drawLine(stars[1],stars[2]);
+
+		}, 50);
+
+
+
+
+		//DRAW A CURVY LINE
+		function drawBezierCurve(){
+      ctx.beginPath();
+      ctx.moveTo(188, 130);
+      ctx.bezierCurveTo(140, 10, 388, 10, 388, 170);
+      ctx.lineWidth = 10;
+
+      // line color
+      ctx.strokeStyle = 'red';
+      ctx.stroke();
+		}
+
+
+
+
+	});
+
+  
+</script> 

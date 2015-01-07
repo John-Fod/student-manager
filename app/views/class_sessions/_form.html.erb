@@ -20,7 +20,7 @@
           <li class="field room select">
             <%= f.label :room_id, "Room" %>
             <% if @school.rooms.size > 1 %>
-              <%= f.select :room_id, @school.rooms.all.map { |r| ["#{r.name}", r.id]} %>
+              <%= f.select :room_id, @school.rooms.all.map { |r| ["#{r.name}", r.id]}, :include_blank => "None" %>
             <% else %>
               <li class="field room select">
                 <%= f.select :room_id, [
@@ -35,6 +35,10 @@
       <li class="field">
         <%= f.label :teacher_id %>
         <%= f.select :teacher_id, @school.all_teachers.map{ |t| [t.name, "#{t.id}"] } %>
+      </li>
+      <li class="Field">
+        <%= f.label :status %>
+        <%= f.select :status, ClassSession.status.each_with_index.map { |s| ["#{s}", ClassSession.status.index(s)]} %>
       </li>
       <li class="field">
         <%= f.label :name, "Name (optional)" %>

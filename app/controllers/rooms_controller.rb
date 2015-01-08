@@ -118,6 +118,7 @@ class RoomsController < ApplicationController
         end
       end
     end
+    
 
     def require_valid_school_editor
       unless @school.editable_by? current_teacher

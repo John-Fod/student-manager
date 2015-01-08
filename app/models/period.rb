@@ -12,4 +12,9 @@ class Period < ActiveRecord::Base
 		end
 	end
 
+	#-CHECK IF A USER CAN EDIT A USER OBJECT
+	def editable_by? editor=nil
+		return true if((editor)&&(self.school.editable_by? editor))
+	end
+
 end

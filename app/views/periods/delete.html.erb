@@ -1,0 +1,38 @@
+<div class="five columns alpha">
+
+	<%-#--THE SCHOOL BANNER --%>
+	<%= render 'schools/banner', :entry => @school %>
+
+	<%-#--THE PERIOD'S HEADER--%>
+	<%= render 'header', :entry => @period %>
+
+	<%-#--EDITOR OPTIONS--%>
+	<% if @period.editable_by? current_teacher %>
+		<section class="standard actions">
+			<h3 class="section-header">Actions</h3>
+			<ul class="actions-list">
+				<li><%= link_to "Edit period", edit_school_room_path(@period.school,@period) %></li>
+				<li><%= link_to "Delete Period", delete_school_room_path(@period.school,@period) %></li>
+			</ul>
+		</section>
+	<% end %>
+
+</div>
+
+
+<div class="eleven columns omega">
+
+	<section class="standard deletion-prompt">
+		<h1>Are you sure you want to delete <%= @period.name %>?</h1>
+		<p>Period deletion is <strong>permanent</strong>.  This period will be removed from its school.</p>
+			<ul>
+				<li>
+					<%= link_to "Delete", school_period_path(@period.school,@period), method: :delete, :id => "confirm_deletion" %>
+				</li>
+				<li>
+					<%= link_to "Back", school_period_path(@period.school,@period) %>
+				</li>
+			</ul>
+	</section>
+
+</div>

@@ -1,6 +1,8 @@
 class PeriodsController < ApplicationController
 
+  before_action :require_logged_in_teacher, only: [:new, :create, :edit, :update, :delete, :destroy]
   before_action :set_school, only: [:show, :new, :create, :edit, :update, :delete, :destroy]
+  before_action :require_valid_school_editor, only: [:new, :create, :edit, :update, :delete, :destroy]
   before_action :set_period, only: [:show, :edit, :update, :destroy, :delete]
 
   # GET /periods
@@ -63,7 +65,7 @@ class PeriodsController < ApplicationController
   def destroy
     @period.destroy
     respond_to do |format|
-      format.html { redirect_to periods_url, notice: 'Period was successfully destroyed.' }
+      format.html { redirect_to @period.school, notice: 'Period was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -71,7 +73,7 @@ class PeriodsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_period
-      @period = Period.find(params[:id])
+      redirect_to @school, :alert => "That period does not exist." unless @period = @school.periods.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -83,7 +85,14 @@ class PeriodsController < ApplicationController
 
     def set_school
       unless @school = get_school
-        redirect_to schools_path, :alert => "That school does not exist."
+        redirect_to dashboard_path, :alert => "That school does not exist."
+      end
+    end
+    
+
+    def require_valid_school_editor
+      unless @school.editable_by? current_teacher
+        redirect_to dashboard_path, :alert => "You do not have permission to edit that school."
       end
     end
 

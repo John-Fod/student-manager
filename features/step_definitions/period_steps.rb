@@ -14,6 +14,57 @@ end
 #WHEN
 #---------------------------
 
+
+
+# VISIT A NEW PAGE
+When(/^I am on the new period page for the school "(.*?)"$/) do |school_name|
+  if school = School.find_by_name("#{school_name}")
+  	visit new_school_period_path(school)
+  else
+  	visit new_school_period_path(0)
+  end
+end
+
+
+
+# VISIT AN EDIT PAGE
+When(/^I am on the edit period page for the school "(.*?)" and the period "(.*?)"$/) do |school_name, period_name|
+	# GET THE SCHOOL
+	if school = School.find_by_name("#{school_name}")
+		school_id = school.to_param
+	else
+		school_id = 0
+	end
+	# GET THE ROOM
+	if period = Period.find_by_name("#{period_name}")
+		period_id = period.to_param
+	else
+		period_id = 0
+	end
+	# VISIT THE EDIT PAGE
+	visit edit_school_period_path(school_id,period_id)
+end
+
+
+# VISIT A DELETE PAGE
+When(/^I am on the delete period page for the school "(.*?)" and the period "(.*?)"$/) do |school_name, period_name|
+	# GET THE SCHOOL
+	if school = School.find_by_name("#{school_name}")
+		school_id = school.to_param
+	else
+		school_id = 0
+	end
+	# GET THE ROOM
+	if period = Period.find_by_name("#{period_name}")
+		period_id = period.to_param
+	else
+		period_id = 0
+	end
+	# VISIT THE EDIT PAGE
+	visit delete_school_period_path(school_id,period_id)
+end
+
+
 When (/^I select the room "(.*?)" for period "(.*?)" and teacher "(.*?)"$/) do |room_name, period_name, teacher_name|
 	room = Room.find_by_name("#{room_name}")
 	period = Period.find_by_name("#{period_name}")
